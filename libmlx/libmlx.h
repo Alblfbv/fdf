@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:59:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/09 19:06:01 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/11 20:09:02 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,28 @@
 
 # include <math.h>
 # include "mlx.h"
+# include "libft.h"
+
+# define X 0
+# define Y 1
+# define LITTLE 0
+# define BIG 1
 
 typedef struct	s_point
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
+	int		color;
+	int 	endian;
 }				t_point;
+
+typedef struct	s_plan
+{
+	int	x_min;
+	int	x_max;
+	int	y_min;
+	int	y_max;
+}				t_plan;
 
 typedef struct	s_ptrs
 {
@@ -34,16 +50,33 @@ typedef struct	s_img
 	char	*buf;
 	int		bits_per_pixel;
 	int		size_line;
-	int		height;
-	int		width;
+	t_plan	plan;
 	int		endian;
 }				t_img;
 
-void	l_mlx_draw_line(t_ptrs *ptrs, t_img *img, t_point *points, int **colors);
-int		l_mlx_bufpos(t_img *img, t_point *point); //return -1 si en dehors de l'image (si x < ou > width et y < ou > height)
-int		l_mlx_compute_color(t_point *limits, t_point *pos, int **colors);
-void	l_mlx_write_pixel(t_img *img, int index, int color);
+typedef struct s_subcolors
+{
+	char	red;
+	char	green;
+	char	blue;
+	char	alpha;
+}				t_subcolors;
 
-
+void	l_mlx_draw_line(t_ptrs *ptrs, t_img *img, t_point *start, t_point *end);
+void	l_mlx_write_pixel(t_img *img, t_point *point, double color_pct);
+int		l_mlx_compute_color();
+int		l_mlx_actualize_points(t_point *start, t_point *end, t_plan *plan);
+int		check_projection(t_point *var_point, t_point *ref_point, t_plan *plan);
+int		l_mlx_is_x_on_plan(double x, t_plan *plan);
+int		l_mlx_is_y_on_plan(double y, t_plan *plan);
+int		l_mlx_is_on_plan(t_point *point, t_plan *plan);
+int		l_mlx_compute_color(t_point *start, t_point *end, t_point *curr);
+int		l_mlx_compute_sub_color(int sub1, int sub2, double percentage);
+int		l_mlx_compute_color_big(int color1, int color2, double percentage);
+int		l_mlx_compute_color_little(int color1, int color2, double percentage);
+double	l_mlx_compute_gradient(t_point *p1, t_point *p2);
+t_point	l_mlx_x_projection(t_point *var_point, double gradient, int value);
+t_point	l_mlx_y_projection(t_point *var_point, double gradient, int value);
+t_point	l_mlx_projection(t_point *var_point, double gradient, int axis, int value);
 
 #endif
