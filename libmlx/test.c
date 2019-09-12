@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 typedef struct test
 {
@@ -24,9 +25,13 @@ void	copy(test *new)
 int		main(void)
 {
 	test new;
+	double	test;
+
+	test = -16.88787;
 
 	copy(&new);
-	printf("new.a = %d\nnew.b = %d\nnew.c = %d\nnew.d = %d\n", new.a, new.b, new.c, new.d);
+	//printf("new.a = %d\nnew.b = %d\nnew.c = %d\nnew.d = %d\n", new.a, new.b, new.c, new.d);
+	printf("%lf", (test > 0 ? test - (long long)test : (long long)test - test));
 	return (0);
 }
 

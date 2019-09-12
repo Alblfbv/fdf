@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:37:07 by allefebv          #+#    #+#             */
-/*   Updated: 2019/08/27 19:29:21 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/12 15:36:16 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void				*ft_memalloc(size_t len);
 void				ft_memdel(void **as);
 
 void				ft_bzero(void *s, size_t len);
+void				ft_swap(void **content1, void **content2);
+void				ft_swap_db(double *db1, double *db2);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strnew(size_t len);
@@ -150,7 +152,13 @@ int					ft_power(int nb, int pwr);
 size_t				ft_nblen(int n);
 void				ft_sort(int *tab, size_t len);
 
+double				ft_fpart(double nb);
+double				ft_rfpart(double nb);
+double				ft_abs_db(double nb);
+double				ft_percentage(double n1, double n2);
+
 int					get_next_line(const int fd, char **line);
+int					get_next_line2(int fd, char **line, char **str);
 int					ft_printf(char *format, ...);
 
 #endif
