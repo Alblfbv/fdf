@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:59:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/12 18:23:10 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/13 17:22:07 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,17 @@ typedef struct	s_img
 	char	*buf;
 	int		bits_per_pixel;
 	int		size_line;
+	int		size_buf;
 	t_plan	plan;
 	int		endian;
 }				t_img;
 
 typedef struct s_subcolors
 {
-	char	red;
-	char	green;
-	char	blue;
-	char	alpha;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
+	unsigned char	alpha;
 }				t_subcolors;
 
 typedef struct	s_draw_line
@@ -83,7 +84,7 @@ int		l_mlx_is_x_on_plan(double x, t_plan *plan);
 int		l_mlx_is_y_on_plan(double y, t_plan *plan);
 int		l_mlx_is_on_plan(t_point *point, t_plan *plan);
 int		l_mlx_compute_color(t_point *start, t_point *end, t_point *curr);
-char	l_mlx_compute_sub_color(char sub1, char sub2, double percentage);
+unsigned char	l_mlx_compute_sub_color(unsigned char sub1, unsigned char sub2, double percentage);
 int		l_mlx_compute_color_big(int color1, int color2, double percentage);
 int		l_mlx_compute_color_little(int color1, int color2, double percentage);
 double	l_mlx_compute_gradient(t_point *p1, t_point *p2);

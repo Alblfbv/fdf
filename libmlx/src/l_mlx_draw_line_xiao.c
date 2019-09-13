@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:56:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/12 19:19:11 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/13 19:43:07 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	draw_limit(t_img *img, t_point *point, t_draw_line *line, int limit)
 	draw_point.endian = img->endian;
 	l_mlx_write_pixel_pct(img, &draw_point, ft_rfpart(y_limit) * x_gap);
 	line->steep ? (draw_point.x)++ : (draw_point.y)++;
-	// attention a ne pas depasser !
 	l_mlx_write_pixel_pct(img, &draw_point, ft_fpart(y_limit) * x_gap);
 	(limit == START) ? (line->x_pxl_start = x_pxl) : (line->x_pxl_end = x_pxl);
 }
@@ -45,12 +44,14 @@ static void draw_middle_points(t_img *img, t_point *start, t_point *end,\
 	x_pxl_mid = line->x_pxl_start;
 	while (++x_pxl_mid < line->x_pxl_end)
 	{
+		draw_point.x = x_pxl_mid;
+		draw_point.y = floor(line->y_intrsct);
 		draw_point.color = l_mlx_compute_color(start, end, &draw_point);
-		draw_point.x = line->steep ? floor(line->y_intrsct) : x_pxl_mid;
-		draw_point.y = line->steep ? x_pxl_mid : floor(line->y_intrsct);
-		l_mlx_write_pixel_pct(img, &draw_point, 1 - floor(line->y_intrsct));
+		if (line->steep)
+			ft_swap_db(&draw_point.x, &draw_point.y);
+		l_mlx_write_pixel_pct(img, &draw_point, ft_rfpart(line->y_intrsct));
 		line->steep ? (draw_point.x)++ : (draw_point.y)++;
-		l_mlx_write_pixel_pct(img, &draw_point, floor(line->y_intrsct));
+		l_mlx_write_pixel_pct(img, &draw_point, ft_fpart(line->y_intrsct));
 		line->y_intrsct += line->gradient;
 	}
 }
@@ -59,6 +60,7 @@ void		l_mlx_draw_line(t_img *img, t_point start, t_point end)
 {
 	t_draw_line	line;
 
+	img->size_buf = img->size_line * img->plan.y_max;
 	if (!l_mlx_actualize_points(&start, &end, &img->plan))
 		return ;
 	line.steep = (fabs(end.y - start.y) > fabs(end.x - start.x) ? 1 : 0);
@@ -71,6 +73,7 @@ void		l_mlx_draw_line(t_img *img, t_point start, t_point end)
 	{
 		ft_swap_db(&start.x, &end.x);
 		ft_swap_db(&start.y, &end.y);
+		ft_swap_int(&start.color, &end.color);
 	}
 	line.gradient = (start.x == end.x) ? 1 : l_mlx_compute_gradient(&start, &end);
 	draw_limit(img, &start, &line, START); // start_limit

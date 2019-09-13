@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   l_mlx_utils_proj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:12:33 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/12 14:59:10 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/13 19:28:08 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	check_proj_horizontal(t_point *var_point, t_point *ref_point, t_plan 
 
 	if (!l_mlx_is_y_on_plan(var_point->y, plan))
 		return (0);
-	if (!l_mlx_is_x_on_plan(var_point->x, plan))
+	if (l_mlx_is_x_on_plan(var_point->x, plan))
 		return (1);
 	if (var_point->x < plan->x_min)
 	{
@@ -87,7 +87,7 @@ static int	check_proj_horizontal(t_point *var_point, t_point *ref_point, t_plan 
 		proj_point.y = var_point->y;
 		proj_point.x = plan->x_min;
 		proj_point.color = l_mlx_compute_color(var_point, ref_point, &proj_point);
-			proj_point.endian = var_point->endian;
+		proj_point.endian = var_point->endian;
 		*var_point = proj_point;
 		return (1);
 	}
@@ -96,7 +96,7 @@ static int	check_proj_horizontal(t_point *var_point, t_point *ref_point, t_plan 
 	proj_point.y = var_point->y;
 	proj_point.x = plan->x_max;
 	proj_point.color = l_mlx_compute_color(var_point, ref_point, &proj_point);
-		proj_point.endian = var_point->endian;
+	proj_point.endian = var_point->endian;
 	*var_point = proj_point;
 	return (1);
 }
@@ -107,7 +107,7 @@ static int	check_proj_vertical(t_point *var_point, t_point *ref_point, t_plan *p
 
 	if (!l_mlx_is_x_on_plan(var_point->x, plan))
 		return (0);
-	if (!l_mlx_is_y_on_plan(var_point->y, plan))
+	if (l_mlx_is_y_on_plan(var_point->y, plan))
 		return (1);
 	if (var_point->y < plan->y_min)
 	{

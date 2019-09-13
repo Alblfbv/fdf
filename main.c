@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 16:02:13 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/12 19:23:04 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/13 19:48:03 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,50 @@ int		main(void)
 	t_img	img;
 	t_point	p1;
 	t_point	p2;
+	t_point	p3;
+	t_point	p4;
+	t_point	start;
+	t_point end;
 
-	p1.x = -300;
-	p1.y = 32;
-	p1.color = 0x283AFF;
-	p1.endian = LITTLE;
-	p2.x = 40;
-	p2.y = 70;
-	p2.color = 0xFF3B25;
-	p2.endian = LITTLE;
+	p1.x = 0;
+	p1.y = 0;
+	p1.color = 0xFFFFFF;
+	p1.endian = 0;
+	p2.x = 1000;
+	p2.y = 0;
+	p2.color = 0xFFFFFF;
+	p2.endian = 0;
+	p3.x = 0;
+	p3.y = 1000;
+	p3.color = 0xFFFFFF;
+	p3.endian = 0;
+	p4.x = 1000;
+	p4.y = 1000;
+	p4.color = 0xFFFFFF;
+	p4.endian = 0;
+	start.x = -500;
+	start.y = 500;
+	start.color = 0xFFFA00;
+	start.endian = 0;
+	end.x = 500;
+	end.y = 500;
+	end.color = 0xF50000;
+	end.endian = 0;
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 2560, 1440, "first try");
-	img.img_ptr = mlx_new_image(mlx_ptr, 500, 500);
+	img.img_ptr = mlx_new_image(mlx_ptr, 1000, 1000);
 	img.buf = mlx_get_data_addr (img.img_ptr, &img.bits_per_pixel, &img.size_line,\
 		   &img.endian);
 	img.plan.x_min = 0;
-	img.plan.x_max = 500;
+	img.plan.x_max = 1000;
 	img.plan.y_min = 0;
-	img.plan.y_max = 500;
+	img.plan.y_max = 1000;
+	l_mlx_draw_line(&img, p2, p4);
 	l_mlx_draw_line(&img, p1, p2);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, 200, 200);
+	l_mlx_draw_line(&img, p1, p3);
+	l_mlx_draw_line(&img, p3, p4);
+	l_mlx_draw_line(&img, start, end);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, 780, 220);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

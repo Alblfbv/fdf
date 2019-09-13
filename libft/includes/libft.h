@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:37:07 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/12 15:36:16 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/13 14:58:14 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void				ft_memdel(void **as);
 void				ft_bzero(void *s, size_t len);
 void				ft_swap(void **content1, void **content2);
 void				ft_swap_db(double *db1, double *db2);
+void				ft_swap_int(int *nb1, int *nb2);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strnew(size_t len);
