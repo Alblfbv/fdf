@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:59:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/13 17:22:07 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/14 17:05:08 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef struct	s_draw_line
 	int		x_pxl_end;
 }				t_draw_line;		
 
-void	l_mlx_draw_line(t_img *img, t_point start, t_point end);
+void	l_mlx_draw_line_xiaolin(t_img *img, t_point start, t_point end);
+void	l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end);
 void	l_mlx_write_pixel(t_img *img, t_point *point);
 void	l_mlx_write_pixel_pct(t_img *img, t_point *point, double percentage);
 int		l_mlx_compute_color();

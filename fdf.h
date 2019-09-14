@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/09 19:06:00 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/14 19:55:50 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define FDF_H
 
 # include <math.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
 # include "mlx.h"
 # include "libft.h"
 

@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:56:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/13 19:43:07 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/14 17:07:56 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void draw_middle_points(t_img *img, t_point *start, t_point *end,\
 	}
 }
 
-void		l_mlx_draw_line(t_img *img, t_point start, t_point end)
+void		l_mlx_draw_line_xiaolin(t_img *img, t_point start, t_point end)
 {
 	t_draw_line	line;
 

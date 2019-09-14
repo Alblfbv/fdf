@@ -6,7 +6,7 @@
 #    By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 12:30:08 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/12 16:34:07 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/14 17:07:55 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME = l_mlx_is_on_plan.c\
 		   l_mlx_compute_color.c\
 		   l_mlx_compute_gradient.c\
 		   l_mlx_draw_line_xiao.c\
+		   l_mlx_draw_line_bresenham.c\
 		   l_mlx_is_on_plan.c\
 		   l_mlx_projections.c\
 		   l_mlx_write_pixel.c
