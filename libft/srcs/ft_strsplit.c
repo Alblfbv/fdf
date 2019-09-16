@@ -6,7 +6,7 @@
 /*   By: allefebv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 12:58:09 by allefebv          #+#    #+#             */
-/*   Updated: 2019/02/11 15:40:11 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/16 13:09:04 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	size_s_str = ft_size(s, c);
-	if (!(s_str = (char**)malloc(sizeof(char*) * (size_s_str + 1))))
+	if (!(s_str = (char**)ft_memalloc(sizeof(char*) * (size_s_str + 1))))
 		return (NULL);
 	s_str[size_s_str] = 0;
 	i = 0;

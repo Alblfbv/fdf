@@ -6,10 +6,11 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:36:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/12 14:16:57 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:41:25 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "get_next_line2.h"
 
 static int	fill_line(char **str, char **line)

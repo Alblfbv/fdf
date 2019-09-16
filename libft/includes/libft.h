@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:37:07 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/14 19:55:48 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:22:00 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include <string.h>
 # include <unistd.h>
-
-# define BUFF_SIZE 32
+# include <stdlib.h>
 
 typedef enum		e_br_tree_color
 {
@@ -102,6 +101,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_islower(int c);
 int					ft_isupper(int c);
+int					ft_is_int(char *str);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
@@ -157,6 +157,8 @@ double				ft_fpart(double nb);
 double				ft_rfpart(double nb);
 double				ft_abs_db(double nb);
 double				ft_percentage(double n1, double n2);
+
+void				ft_free_split(char **split);
 
 int					get_next_line(const int fd, char **line);
 int					get_next_line2(int fd, char **line, char **str);

@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/14 19:55:50 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/16 16:57:51 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define SCREEN_WIDTH 0
-# define SCREEN_HEIGHT 0
-# define START_X 0
-# define START_Y 0
+# define WIN_WDTH 0
+# define WIN_HGHT 0
+# define IMG_WDTH 0
+# define IMG_HGHT 0
+# define START_X_IMG 0
+# define START_Y_IMG 0
 # define TRANS_DELTA 1
 # define ROT_DELTA (M_PI / 36)
 # define SCALE_DELTA (10 / 100)
@@ -91,25 +93,67 @@ typedef struct	s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
+	t_img	img;
+	/*
+	void	*img_ptr
 	char	*img_buf;
 	int		size_line;
 	int		bits_per_pixel;
 	int		endian;
+	*/
 }				t_mlx;
 
 typedef struct	s_fdf
 {
 	int			nb_cols;
 	int			nb_rows;
+	int			nb_vertices;
 	int			nb_edges;
 	int			base_scale;
+	int			shift_x;
+	int			shift_y;
 	t_mlx		mlx;
 	t_edge		*edges;
+	t_vertex	*vtcs_ref;
 	t_vertex	*vtcs_3d;
 	t_vertex	*vtcs_2d;
 	t_modifiers	mods;
 	t_matrices	mtx;
 }				t_fdf;
+
+typedef struct	s_lines
+{
+	char			**split;
+	struct s_lines	*next;
+}				t_lines;
+
+/*
+** map parsing
+*/
+
+int			parse_map(t_fdf *fdf, int fd);
+
+/*
+** main structure init
+*/
+
+int			init_fdf(t_fdf *fdf);
+
+/*
+** free functions
+*/
+
+void		free_fdf(t_fdf *fdf);
+void		free_list(t_lines *lines);
+
+/*
+** error functions
+*/
+
+int			print_usage(void);
+int			print_sys_error(int errnum);
+int			print_input_error(int errnum);
+int			print_mlx_error(int errnum);
+
 
 #endif

@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/28 20:45:46 by allefebv          #+#    #+#              #
-#    Updated: 2019/09/13 14:58:47 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/16 15:24:29 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,14 @@ SRCS	=	$(addprefix srcs/, ft_memset.c ft_bzero.c ft_memcpy.c		\
 			ft_strndup.c ft_power.c ft_nblen.c ft_isupper.c 			\
 			ft_islower.c ft_sort.c ft_strnjoin.c ft_strextend.c			\
 			ft_strnextend.c ft_itoa_base.c ft_strrnchr.c ft_strnchr.c	\
-			ft_strupcase.c get_next_line.c ft_treeadd.c ft_treenew.c	\
+			ft_strupcase.c ft_treeadd.c ft_treenew.c					\
 			ft_tree_inorder_print.c ft_treenew_ptr.c					\
 			ft_br_tree_left_rotate.c ft_br_tree_right_rotate.c			\
 			ft_br_tree_utils.c ft_br_treeadd.c 							\
 			ft_br_tree_rules_cases.c ft_treedel.c ft_treedelone.c		\
 			ft_percentage.c ft_abs_db.c ft_swap.c ft_swap_db.c 			\
-			ft_swap_int.c ft_fpart.c ft_rfpart.c)
+			ft_swap_int.c ft_fpart.c ft_rfpart.c ft_free_split.c		\
+			ft_is_int.c get_next_line2.c)
 
 SRCPRTF	=	$(addprefix srcs/ft_printf/, ft_printf.c store/ft_store_struct.c	\
 			store/ft_store_struct_2.c store/ft_struct_init_del.c			\
