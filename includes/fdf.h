@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/16 16:57:51 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/17 18:40:54 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include "mlx.h"
 # include "libft.h"
+# include "libmlx.h"
 
 # define WIN_WDTH 0
 # define WIN_HGHT 0
@@ -30,11 +31,17 @@
 # define ROT_DELTA (M_PI / 36)
 # define SCALE_DELTA (10 / 100)
 # define ALTITUDE_DELTA (10 / 100)
-# define DEEP_BLUE 0x0
-# define LIGHT_BLUE 0x0
-# define GREEN 0x0
-# define BROWN 0x0
-# define WHITE 0x0
+# define NB_COLORS 5
+# define DEEP_BLUE_INT 0x042295
+# define DEEP_BLUE_ALT (-100)
+# define LIGHT_BLUE_INT 0x45B5FF
+# define LIGHT_BLUE_ALT (-50)
+# define GREEN_INT 0x00FF00
+# define GREEN_ALT 0
+# define BROWN_INT 0xAD6924
+# define BROWN_ALT 100
+# define WHITE_INT 0xFFFFFFFF
+# define WHITE_ALT 200
 # define X_ROT_L 7
 # define X_ROT_R 9
 # define Y_ROT_L 4
@@ -47,12 +54,20 @@
 # define OTHER @
 # define RESET del
 # define ESCAPE esc
+# define EVENTS_NB 10 //nombre a actualiser
+
 
 typedef enum	e_projection
 {
 	iso,
 	other,
 }				t_projection;
+
+typedef enum	e_draw_mode
+{
+	bresenham,
+	xiaolin,
+}				t_draw_mode;
 
 typedef struct	s_vertex
 {
@@ -67,6 +82,19 @@ typedef struct	s_edge
 	int	vtx_2;
 }				t_edge;
 
+typedef struct	s_point_alt
+{
+	t_point	point;
+	double	z;
+	int		interval;
+}				t_point_alt;
+
+typedef struct	s_color_alt
+{
+	int		color;
+	double	altitude;
+}				t_color_alt;
+
 typedef struct	s_modifiers
 {
 	int				trans_x;
@@ -78,6 +106,7 @@ typedef struct	s_modifiers
 	double			scale_coef;
 	double			altitude_mod;
 	t_projection	proj;
+	t_draw_mode		draw_mode;
 }				t_modifiers;
 
 typedef struct	s_matrices
@@ -138,6 +167,17 @@ int			parse_map(t_fdf *fdf, int fd);
 */
 
 int			init_fdf(t_fdf *fdf);
+
+/*
+** drawing functions
+*/
+
+void		draw_object(t_fdf *fdf);
+void		swap_points(t_point_alt *p1, t_point_alt *p2);
+int			give_interval(double z1);
+t_color_alt	*tab_color_alt(void);
+void	draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
+		t_draw_mode draw_mode); // a retirer
 
 /*
 ** free functions

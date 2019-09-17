@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/16 16:57:50 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/17 09:39:18 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	init_mlx(t_fdf *fdf)
 	if (!(fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_WDTH,\
 				WIN_HGHT, "fdf")))
 		return (print_mlx_error(2));	
-	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr, IMG_WDTH, IMG_HGHT)))
+	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr,\
+				IMG_WDTH, IMG_HGHT)))
 		return (print_mlx_error(3));
-	
-	fdf->mlx.img.img_buf = mlx_get_data_addr (fdf->mlx.img.img_ptr,\
+	fdf->mlx.img.buf = mlx_get_data_addr (fdf->mlx.img.img_ptr,\
 		&fdf->mlx.img.bits_per_pixel, &fdf->mlx.img.size_line,\
 		&fdf->mlx.img.endian);
 	fdf->mlx.img.plan.x_min = 0;

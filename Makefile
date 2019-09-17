@@ -6,7 +6,7 @@
 #    By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/16 16:09:18 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/17 14:15:54 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC_PATH = src
 SRC_NAME = fdf.c\
 		   parsing.c\
 		   init_fdf.c\
+		   draw_object.c\
+		   draw_object_utils.c\
 		   free_functions.c\
 		   errors.c
 
