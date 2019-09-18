@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_line_division.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/12 16:02:13 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/17 18:40:57 by rkirszba         ###   ########.fr       */
+/*   Created: 2019/09/18 17:59:52 by rkirszba          #+#    #+#             */
+/*   Updated: 2019/09/18 18:00:12 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "libmlx.h"
 #include "fdf.h"
+
+// compiler command : gccflags -g -I /usr/local/include -I libft/includes -I libmlx/includes -I includes test_line_division.c src/draw_object.c src/draw_object_utils.c libft/libft.a libmlx/libmlx.a -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 int		main(void)
 {

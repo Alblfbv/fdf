@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/17 09:39:18 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/18 16:02:07 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ int			init_fdf(t_fdf *fdf)
 		return (1);
 	if (!(fdf->vtcs_2d = (t_vertex *)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
 		return ((print_sys_error(errno)));
-//	init_matrices(fdf);
 	compute_base_scale(fdf);
 	fdf->mods.scale_coef = 1;
 	fdf->mods.altitude_mod = 1;
-	fdf->mods.proj = iso;
+//	reinit_matrices(fdf);
 	return (0);
 }

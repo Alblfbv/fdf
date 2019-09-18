@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_draw_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/12 16:02:13 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/17 10:36:38 by rkirszba         ###   ########.fr       */
+/*   Created: 2019/09/18 17:59:23 by rkirszba          #+#    #+#             */
+/*   Updated: 2019/09/18 17:59:25 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libmlx.h"
+
+// compiler command : gccflags -g -I /usr/local/include -I libft/includes -I libmlx/includes test_draw_line.c libft/libft.a libmlx/libmlx.a -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 int		main(void)
 {

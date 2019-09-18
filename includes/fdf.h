@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/17 18:40:54 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/18 19:46:54 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define START_X_IMG 0
 # define START_Y_IMG 0
 # define TRANS_DELTA 1
-# define ROT_DELTA (M_PI / 36)
+# define ROT_DELTA 5 
 # define SCALE_DELTA (10 / 100)
 # define ALTITUDE_DELTA (10 / 100)
 # define NB_COLORS 5
@@ -42,19 +42,35 @@
 # define BROWN_ALT 100
 # define WHITE_INT 0xFFFFFFFF
 # define WHITE_ALT 200
-# define X_ROT_L 7
-# define X_ROT_R 9
-# define Y_ROT_L 4
-# define Y_ROT_R 6
-# define Z_ROT_L 1
-# define Z_ROT_R 3
-# define SCALE_P +
-# define SCALE_M -
-# define ISO !
-# define OTHER @
-# define RESET del
-# define ESCAPE esc
-# define EVENTS_NB 10 //nombre a actualiser
+# define X_ROT_L 89 //7
+# define X_ROT_R 92 //9
+# define Y_ROT_L 86 //4
+# define Y_ROT_R 88 //6
+# define Z_ROT_L 83 //1
+# define Z_ROT_R 85 //3
+# define X_TRANS_L 12 //q
+# define X_TRANS_R 13 //w
+# define Y_TRANS_L 0 //a
+# define Y_TRANS_R 1 //s
+# define Z_TRANS_L 6 //z
+# define Z_TRANS_R 7 //x
+# define SCALE_M 78 //-
+# define SCALE_P 69 //+
+# define ALT_M 84 //2
+# define ALT_P 91 //8
+# define ISO 18 //!
+# define OTHER 19 //@
+# define ALIASING 20//3
+# define RESET 51 //del
+# define QUIT 53 //esc
+# define EVENTS_NB 21 //nombre a actualiser
+# define KEY_PRESS 2
+# define RED_BUTTON 17
+# define COLOR_BG 0x1375FF
+# define COLOR_WR 0xFFFFFF
+# define X_STR 10
+# define Y_STR 25
+# define Y_OFFSET 40
 
 
 typedef enum	e_projection
@@ -95,6 +111,7 @@ typedef struct	s_color_alt
 	double	altitude;
 }				t_color_alt;
 
+
 typedef struct	s_modifiers
 {
 	int				trans_x;
@@ -123,13 +140,6 @@ typedef struct	s_mlx
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
-	/*
-	void	*img_ptr
-	char	*img_buf;
-	int		size_line;
-	int		bits_per_pixel;
-	int		endian;
-	*/
 }				t_mlx;
 
 typedef struct	s_fdf
@@ -156,6 +166,11 @@ typedef struct	s_lines
 	struct s_lines	*next;
 }				t_lines;
 
+typedef struct	s_event
+{
+	int	keycode;
+	int (*function)(int, t_fdf*);
+}				t_event;
 /*
 ** map parsing
 */
@@ -172,12 +187,29 @@ int			init_fdf(t_fdf *fdf);
 ** drawing functions
 */
 
+
+void		display_object_routine(t_fdf *fdf);
 void		draw_object(t_fdf *fdf);
 void		swap_points(t_point_alt *p1, t_point_alt *p2);
 int			give_interval(double z1);
 t_color_alt	*tab_color_alt(void);
-void	draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
-		t_draw_mode draw_mode); // a retirer
+void		draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
+			t_draw_mode draw_mode);
+
+/*
+** events handlers
+*/
+
+int			handle_expose_event(t_fdf *fdf);
+int			handle_key_events(int keycode, t_fdf *fdf);
+int			handle_rot_events(int keycode, t_fdf *fdf);
+int			handle_scale_events(int keycode, t_fdf *fdf);
+int			handle_translation_events(int keycode, t_fdf *fdf);
+int			handle_projection_events(int keycode, t_fdf *fdf);
+int			handle_altitude_events(int keycode, t_fdf *fdf);
+int			handle_draw_mode_event(int keycode, t_fdf *fdf);
+int			handle_reset_event(int keycode, t_fdf *fdf);
+int			handle_quit(int keycode, t_fdf *fdf);
 
 /*
 ** free functions
