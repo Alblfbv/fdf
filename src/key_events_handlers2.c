@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:14:01 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/18 17:48:42 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:28:41 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int			handle_altitude_events(int keycode, t_fdf *fdf);
 	display_object_routine(fdf);
 	return (0);
 }
-
 
 int			handle_draw_mode_event(int keycode, t_fdf *fdf)
 {

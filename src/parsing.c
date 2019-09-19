@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:51:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/16 16:31:48 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:28:42 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int copy_list_to_tab(t_fdf *fdf, t_lines *lines)
 	int	y;
 
 	fdf->nb_vertices = fdf->nb_cols * fdf->nb_rows;
-	if (!(fdf->vtcs_ref = (t_vertex*)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
+	if (!(fdf->vtcs_3d = (t_vertex*)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
 		return (print_sys_error(errno));
 	index = 0;
 	y = -1;
@@ -76,9 +76,9 @@ static int copy_list_to_tab(t_fdf *fdf, t_lines *lines)
 		x = -1;
 		while (++x < fdf->nb_cols)
 		{
-			fdf->vtcs_ref[index].x = (double)x;
-			fdf->vtcs_ref[index].y = (double)y;
-			fdf->vtcs_ref[index].z = (double)ft_atoi(lines->split[x]);
+			fdf->vtcs_3d[index].x = (double)x;
+			fdf->vtcs_3d[index].y = (double)y;
+			fdf->vtcs_3d[index].z = (double)ft_atoi(lines->split[x]);
 			index++;
 		}
 		lines = lines->next;

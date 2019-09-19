@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/18 19:46:54 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:06:07 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@
 # define Y_STR 25
 # define Y_OFFSET 40
 
-
 typedef enum	e_projection
 {
 	iso,
@@ -110,7 +109,6 @@ typedef struct	s_color_alt
 	int		color;
 	double	altitude;
 }				t_color_alt;
-
 
 typedef struct	s_modifiers
 {
@@ -153,7 +151,6 @@ typedef struct	s_fdf
 	int			shift_y;
 	t_mlx		mlx;
 	t_edge		*edges;
-	t_vertex	*vtcs_ref;
 	t_vertex	*vtcs_3d;
 	t_vertex	*vtcs_2d;
 	t_modifiers	mods;
@@ -171,6 +168,7 @@ typedef struct	s_event
 	int	keycode;
 	int (*function)(int, t_fdf*);
 }				t_event;
+
 /*
 ** map parsing
 */
@@ -182,6 +180,18 @@ int			parse_map(t_fdf *fdf, int fd);
 */
 
 int			init_fdf(t_fdf *fdf);
+
+/*
+** projection functions
+*/
+
+void		reinit_matrices(t_fdf *fdf);
+void		reinit_proj_matrix(t_fdf *fdf);
+void		reinit_trans_matrix(t_fdf *fdf);
+void		reinit_scale_matrix(t_fdf *fdf);
+void		reinit_rot_matrix(t_fdf *fdf);
+void		compute_matrices(t_fdf *fdf);
+void		transform_coor(t_fdf *fdf);
 
 /*
 ** drawing functions

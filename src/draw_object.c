@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 10:00:53 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/17 18:40:55 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:28:40 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,13 @@ void		draw_object(t_fdf *fdf)
 		draw_line(fdf, &start, &end, fdf->mods.draw_mode);
 	}	
 }	
+
+void	display_object_routine(t_fdf *fdf)
+{
+	compute_matrices(fdf);
+	transform_coor(fdf);
+	draw_object(fdf);
+	mlx_put_image_to_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, START_X_IMG,\
+		START_Y_IMG);
+	ft_bzero(&fdf->mlx.img.buf, sizeof(char) * fdf->mlx.img.size_buf);
+}

@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/18 16:02:07 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:28:43 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ static int	init_mlx(t_fdf *fdf)
 	fdf->mlx.img.plan.x_max = IMG_WDTH;
 	fdf->mlx.img.plan.y_min = 0;
 	fdf->mlx.img.plan.y_max = IMG_HGHT;
-	return (0);
-}
-
-static int	copy_vtcs_tab(t_fdf *fdf)
-{
-	if (!(fdf->vtcs_3d = (t_vertex*)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
-		return (print_sys_error(errno));
-	ft_memcpy(fdf->vtcs_3d, fdf->vtcs_ref, sizeof(t_vertex) * fdf->nb_vertices);
 	return (0);
 }
 

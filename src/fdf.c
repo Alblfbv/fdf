@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/18 20:00:53 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/19 15:28:45 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ void	draw_background(void *mlx_ptr, void *win_ptr)
 	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "quit = esc");
 }
 
-void	display_object_routine(t_fdf *fdf)
-{
-	compute_matrices(fdf);
-	transform_coor(fdf);
-	draw_object(fdf);
-	mlx_put_image_to_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, START_X_IMG,\
-		START_Y_IMG);
-	ft_bzero(&fdf->mlx.img.buf, sizeof(char) * fdf->mlx.img.size_buf);
-}
 
 int		main(int ac, char **av)
 {
