@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:00 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/19 16:57:08 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:45:23 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		handle_key_events(int keycode, t_fdf *fdf)
 		&handle_trans_events}, {Y_TRANS_L, &handle_trans_events}, {Y_TRANS_R,\
 		&handle_trans_events}, {Z_TRANS_L, &handle_trans_events}, {Z_TRANS_L,\
 		&handle_trans_events}, {SCALE_M, &handle_scale_events}, {SCALE_P,\
-		&handle_scale_events}, {ALT_M, &handle_altitutde_events}, {ALT_P,\
-		&handle_altitude_events}, {ISO, &handle_projection_events}, {OTHER,\
-		&handle_projection_events}, {ALIASING, &handle_draw_mode_event},\
+		&handle_scale_events}, {ALT_M, &handle_alt_events}, {ALT_P,\
+		&handle_alt_events}, {ISO, &handle_proj_events}, {OTHER,\
+		&handle_proj_events}, {ALIASING, &handle_draw_mode_event},\
 		{RESET, &handle_reset_event}, {QUIT, &handle_quit_event}}; 
 	int				i;
 
@@ -34,7 +34,7 @@ int		handle_key_events(int keycode, t_fdf *fdf)
 	return (0);
 }
 
-int		handle_expose_event(t_fdf *fdf)
+int		handle_quit_event_mouse(t_fdf *fdf)
 {
 	free_fdf(fdf);
 	exit (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/19 17:06:07 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/23 19:02:22 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@
 # include "libft.h"
 # include "libmlx.h"
 
-# define WIN_WDTH 0
-# define WIN_HGHT 0
-# define IMG_WDTH 0
-# define IMG_HGHT 0
-# define START_X_IMG 0
-# define START_Y_IMG 0
-# define TRANS_DELTA 1
-# define ROT_DELTA 5 
-# define SCALE_DELTA (10 / 100)
-# define ALTITUDE_DELTA (10 / 100)
+# define WIN_WDTH 2560 
+# define WIN_HGHT 1440
+# define IMG_WDTH 1500
+# define IMG_HGHT 1000
+# define START_X_IMG 530
+# define START_Y_IMG 220
+# define TRANS_DELTA 15
+# define ROT_DELTA 5
+# define SCALE_DELTA 0.1
+# define ALTITUDE_DELTA 0.1
 # define NB_COLORS 5
 # define DEEP_BLUE_INT 0x042295
-# define DEEP_BLUE_ALT (-100)
+# define DEEP_BLUE_ALT (-10)
 # define LIGHT_BLUE_INT 0x45B5FF
-# define LIGHT_BLUE_ALT (-50)
+# define LIGHT_BLUE_ALT (-5)
 # define GREEN_INT 0x00FF00
-# define GREEN_ALT 0
+# define GREEN_ALT 1
 # define BROWN_INT 0xAD6924
-# define BROWN_ALT 100
+# define BROWN_ALT 10
 # define WHITE_INT 0xFFFFFFFF
-# define WHITE_ALT 200
+# define WHITE_ALT 20
 # define X_ROT_L 89 //7
 # define X_ROT_R 92 //9
 # define Y_ROT_L 86 //4
@@ -119,16 +119,19 @@ typedef struct	s_modifiers
 	int				rot_y;
 	int				rot_z;
 	double			scale_coef;
-	double			altitude_mod;
+	double			alt_mod;
 	t_projection	proj;
 	t_draw_mode		draw_mode;
 }				t_modifiers;
 
 typedef struct	s_matrices
 {
-	double	rot_mtx[4][4];
+	double	alt_mtx[4][4];
 	double	scale_mtx[4][4];
 	double	trans_mtx[4][4];
+	double	rot_x_mtx[4][4];
+	double	rot_y_mtx[4][4];
+	double	rot_z_mtx[4][4];
 	double	proj_mtx[4][4];
 	double	tmp_mtx[4][4];
 }				t_matrices;
@@ -186,11 +189,14 @@ int			init_fdf(t_fdf *fdf);
 */
 
 void		reinit_matrices(t_fdf *fdf);
+void		reinit_alt_matrix(t_fdf *fdf);
 void		reinit_proj_matrix(t_fdf *fdf);
 void		reinit_trans_matrix(t_fdf *fdf);
 void		reinit_scale_matrix(t_fdf *fdf);
-void		reinit_rot_matrix(t_fdf *fdf);
-void		compute_matrices(t_fdf *fdf);
+void		reinit_rot_x_matrix(t_fdf *fdf);
+void		reinit_rot_y_matrix(t_fdf *fdf);
+void		reinit_rot_z_matrix(t_fdf *fdf);
+void		compute_tmp_matrix(t_fdf *fdf);
 void		transform_coor(t_fdf *fdf);
 
 /*
@@ -210,16 +216,16 @@ void		draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
 ** events handlers
 */
 
-int			handle_expose_event(t_fdf *fdf);
 int			handle_key_events(int keycode, t_fdf *fdf);
 int			handle_rot_events(int keycode, t_fdf *fdf);
 int			handle_scale_events(int keycode, t_fdf *fdf);
-int			handle_translation_events(int keycode, t_fdf *fdf);
-int			handle_projection_events(int keycode, t_fdf *fdf);
-int			handle_altitude_events(int keycode, t_fdf *fdf);
+int			handle_trans_events(int keycode, t_fdf *fdf);
+int			handle_proj_events(int keycode, t_fdf *fdf);
+int			handle_alt_events(int keycode, t_fdf *fdf);
 int			handle_draw_mode_event(int keycode, t_fdf *fdf);
 int			handle_reset_event(int keycode, t_fdf *fdf);
-int			handle_quit(int keycode, t_fdf *fdf);
+int			handle_quit_event(int keycode, t_fdf *fdf);
+int			handle_quit_event_mouse(t_fdf *fdf);
 
 /*
 ** free functions

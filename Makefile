@@ -6,7 +6,7 @@
 #    By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/19 16:56:39 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/23 17:26:49 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_NAME = fdf.c\
 		   parsing.c\
 		   init_fdf.c\
 		   reinit_matrices.c\
-		   pronection_process.c\
+		   projection_process.c\
 		   draw_object.c\
 		   draw_object_utils.c\
 		   events_handlers.c\
@@ -54,7 +54,8 @@ CC = gcc
 CCFLAGS = -g\
 		  -Wall\
 		  -Wextra\
-		  -Werror
+		  -Werror\
+#		  -fsanitize=address
 
 CPPFLAGS = -I $(HEADER_PATH) -MMD
 

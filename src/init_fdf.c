@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/19 15:28:43 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:00:08 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,17 @@ static void	compute_base_scale(t_fdf *fdf)
 	if (fdf->nb_cols == 1)
 		scale_x = 0xFFFFFFFF;
 	else
-		scale_x = (IMG_WDTH - 2 * START_X_IMG) / (fdf->nb_cols - 1);
+		scale_x = (IMG_WDTH /*- 2 * START_X_IMG*/) / (fdf->nb_cols - 1);
 	if (fdf->nb_rows == 1)
 		scale_y = 0xFFFFFFFF;
 	else
-		scale_y = (IMG_HGHT- 2 * START_Y_IMG) / (fdf->nb_rows- 1);
-	fdf->base_scale = (scale_x > scale_y ? scale_x : scale_y);
+		scale_y = (IMG_HGHT /*- 2 * START_Y_IMG*/) / (fdf->nb_rows- 1);
+	fdf->base_scale = (scale_x > scale_y ? scale_y / 2 : scale_x / 2);
 }
 
 int			init_fdf(t_fdf *fdf)
 {
 	if ((init_mlx(fdf)))
-		return (1);
-	if ((copy_vtcs_tab(fdf)))
 		return (1);
 	if ((init_edges_tab(fdf)))
 		return (1);
@@ -90,7 +88,7 @@ int			init_fdf(t_fdf *fdf)
 		return ((print_sys_error(errno)));
 	compute_base_scale(fdf);
 	fdf->mods.scale_coef = 1;
-	fdf->mods.altitude_mod = 1;
-//	reinit_matrices(fdf);
+	fdf->mods.alt_mod = 1;
+	reinit_matrices(fdf);
 	return (0);
 }

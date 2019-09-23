@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 15:29:37 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/19 17:06:04 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/23 17:41:14 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,73 @@
 
 void	transform_coor(t_fdf *fdf)
 {
-	int		index;
+	int			index;
+	t_vertex	tmp_point;
 
 	index = -1;
-	while (++index < fdf->vertices)
+	while (++index < fdf->nb_vertices)
 	{
-		fdf->vtcs_2d[i].x = // formule pour calculer a partir de vcts_3d et tmp_mtx 
-		fdf->vtcs_2d[i].y = // formule pour calculer a partir de vcts_3d et tmp_mtx 
+		tmp_point = fdf->vtcs_3d[index];
+		fdf->vtcs_2d[index].x = fdf->mtx.tmp_mtx[0][0] * tmp_point.x
+			+ fdf->mtx.tmp_mtx[0][1] * tmp_point.y\
+			+ fdf->mtx.tmp_mtx[0][2] * tmp_point.z\
+			+ fdf->mtx.tmp_mtx[0][3] * 1;
+		fdf->vtcs_2d[index].y = fdf->mtx.tmp_mtx[1][0] * tmp_point.x
+			+ fdf->mtx.tmp_mtx[1][1] * tmp_point.y\
+			+ fdf->mtx.tmp_mtx[1][2] * tmp_point.z\
+			+ fdf->mtx.tmp_mtx[1][3] * 1;
+		fdf->vtcs_2d[index].z = fdf->vtcs_3d[index].z * fdf->mods.alt_mod;
 	}
 }	
 
-void	compute_matrices(t_fdf *fdf)
-{
-	fdf->vtcs_2d[i].z = fdf->vtcs_3d[i].z * fdf->mods.altitude_mod; /* le z sera important
+/*	fdf->vtcs_2d[i].z = fdf->vtcs_3d[i].z * fdf->mods.altitude_mod;le z sera important
 	au moment de calculer la projection, il ne faut pas utiliser celui de la matrice 3d
-	car on veut pouvoir reset*/
-	// algo pour calculer tmp matrices a partir des 4 autres matrices
+	car on veut pouvoir reset
+	algo pour calculer tmp matrices a partir des 4 autres matrices */
+
+static void		copy_mtx(double dst_mtx[4][4], double src_mtx[4][4])
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		ft_memcpy(dst_mtx[i], src_mtx[i], sizeof(double) * 4);
+}
+
+static void		multiply_matrices(double tmp_mtx[4][4], double factor_mtx[4][4])
+{
+	double	product_mtx[4][4];
+	int		i;
+	int		j;
+
+	j = -1;
+	while (++j < 4)
+	{
+		i = -1;
+		while (++i < 4)
+			product_mtx[i][j] = tmp_mtx[0][j] * factor_mtx[i][0]\
+				+ tmp_mtx[1][j] * factor_mtx[i][1]
+				+ tmp_mtx[2][j] * factor_mtx[i][2]
+				+ tmp_mtx[3][j] * factor_mtx[i][3];
+	}
+	copy_mtx(tmp_mtx, product_mtx);
+}
+	
+void			compute_tmp_matrix(t_fdf *fdf)
+{
+//	static double	***mtces = {&fdf->mtx.scale_mtx,
+//		&fdf->mtx.trans_mtx, &fdf->mtx.rot_x_mtx,&fdf->mtx.rot_y_mtx,
+//		&fdf->mtx.rot_z_mtx, &fdf->mtx.proj_mtx}
+//	double			**tmp_mtx;
+//	int				mtx;
+   
+//	mtx = -1;
+//	while (++mtx < 6)
+	copy_mtx(fdf->mtx.tmp_mtx, fdf->mtx.alt_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.scale_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.trans_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.rot_x_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.rot_y_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.rot_z_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.proj_mtx);
 }
