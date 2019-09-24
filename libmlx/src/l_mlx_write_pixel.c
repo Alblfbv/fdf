@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 15:30:24 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/13 19:52:00 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:51:58 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	l_mlx_write_pixel(t_img *img, t_point *point)
 	int	buf_pos;
 
 	buf_pos = point->y * img->size_line + point->x * 4;
-	if (l_mlx_is_on_plan(point, &img->plan) && buf_pos < img->size_buf - 4)
-		ft_memcpy((void*)(img->buf + buf_pos), (void*)(&point->color), sizeof(int));
+	if (l_mlx_is_on_plan(point, &img->plan) && buf_pos < img->size_buf)
+		ft_memcpy((void*)(img->buf + buf_pos), (void*)(&point->color),\
+			sizeof(int));
 }
 
 void	l_mlx_write_pixel_pct(t_img *img, t_point *point, double percentage)

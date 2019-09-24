@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:07:22 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:50:31 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	init_mlx(t_fdf *fdf)
 		&fdf->mlx.img.bits_per_pixel, &fdf->mlx.img.size_line,\
 		&fdf->mlx.img.endian);
 	fdf->mlx.img.plan.x_min = 0;
-	fdf->mlx.img.plan.x_max = IMG_WDTH;
+	fdf->mlx.img.plan.x_max = IMG_WDTH - 1;
 	fdf->mlx.img.plan.y_min = 0;
-	fdf->mlx.img.plan.y_max = IMG_HGHT;
+	fdf->mlx.img.plan.y_max = IMG_HGHT - 1;
 	return (0);
 }
 
