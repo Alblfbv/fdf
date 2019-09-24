@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:16:34 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:59:33 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:36:37 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,29 +171,6 @@ void	reinit_move_matrix(t_fdf *fdf)
 	fdf->mtx.move_mtx[3][1] = 0;
 	fdf->mtx.move_mtx[3][2] = 0;
 	fdf->mtx.move_mtx[3][3] = 1;
-}
-
-void	reinit_proj_matrix(t_fdf *fdf)
-{
-	t_projection	*proj;
-
-	proj = &fdf->mods.proj;
-	fdf->mtx.proj_mtx[0][0] = cos(M_PI / 6);
-	fdf->mtx.proj_mtx[0][1] = -cos(M_PI / 6);
-	fdf->mtx.proj_mtx[0][2] = 0;
-	fdf->mtx.proj_mtx[0][3] = 0;
-	fdf->mtx.proj_mtx[1][0] = sin(M_PI / 6);
-	fdf->mtx.proj_mtx[1][1] = sin(M_PI / 6);
-	fdf->mtx.proj_mtx[1][2] = -1;
-	fdf->mtx.proj_mtx[1][3] = 0;
-	fdf->mtx.proj_mtx[2][0] = 0;
-	fdf->mtx.proj_mtx[2][1] = 0;
-	fdf->mtx.proj_mtx[2][2] = 0;
-	fdf->mtx.proj_mtx[2][3] = 0;
-	fdf->mtx.proj_mtx[3][0] = 0;
-	fdf->mtx.proj_mtx[3][1] = 0;
-	fdf->mtx.proj_mtx[3][2] = 0;
-	fdf->mtx.proj_mtx[3][3] = 1;
 }
 
 void	reinit_matrices(t_fdf *fdf)

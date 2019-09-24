@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:32:27 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:41:19 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@
 # define ALT_M 84 //2
 # define ALT_P 91 //8
 # define ISO 18 //!
-# define OTHER 19 //@
-# define ALIASING 20//3
+# define CABINET 19 // @
+# define ALIASING 21 // 4
 # define RESET 51 //del
 # define QUIT 53 //esc
 # define EVENTS_NB 25 //nombre a actualiser
@@ -80,7 +80,7 @@
 typedef enum	e_projection
 {
 	iso,
-	other,
+	cabinet,
 }				t_projection;
 
 typedef enum	e_draw_mode

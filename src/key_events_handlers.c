@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:12 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:21:02 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:41:24 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		handle_trans_events(int keycode, t_fdf *fdf)
 
 int		handle_proj_events(int keycode, t_fdf *fdf)
 {
-	static int	tab[2] = {ISO, OTHER};
+	static int	tab[2] = {ISO, CABINET};
 	int			i;
 
 	i = -1;
