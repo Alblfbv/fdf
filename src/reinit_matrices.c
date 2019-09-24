@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:16:34 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 14:55:35 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:34:07 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,11 @@ void	reinit_move_matrix(t_fdf *fdf)
 	fdf->mtx.move_mtx[0][0] = 1;
 	fdf->mtx.move_mtx[0][1] = 0;
 	fdf->mtx.move_mtx[0][2] = 0;
-	fdf->mtx.move_mtx[0][3] = mods->move_x;
+	fdf->mtx.move_mtx[0][3] = mods->move_x + fdf->shift_x;
 	fdf->mtx.move_mtx[1][0] = 0;
 	fdf->mtx.move_mtx[1][1] = 1;
 	fdf->mtx.move_mtx[1][2] = 0;
-	fdf->mtx.move_mtx[1][3] = mods->move_y;
+	fdf->mtx.move_mtx[1][3] = mods->move_y + fdf->shift_y;
 	fdf->mtx.move_mtx[2][0] = 0;
 	fdf->mtx.move_mtx[2][1] = 0;
 	fdf->mtx.move_mtx[2][2] = 1;

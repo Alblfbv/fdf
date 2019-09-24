@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 18:00:08 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:07:22 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,36 @@ static int	init_edges_tab(t_fdf *fdf)
 	return (0);
 }	
 
+static void	compute_shifts(t_fdf *fdf)
+{
+	fdf->shift_x = -((int)(-cos((double)(M_PI / 6)) * fdf->nb_rows * fdf->base_scale)) + X_SHIFT;
+	fdf->shift_y = Y_SHIFT;
+}
+
 static void	compute_base_scale(t_fdf *fdf)
 {
-	int scale_x;
-	int scale_y;
+	int 	scale_x;
+	int 	scale_y;
+	double	limit1;
+	double	limit2;
 
-// voir s il ne faut pas en fait tester avec une premiere projection
 	if (fdf->nb_cols == 1)
 		scale_x = 0xFFFFFFFF;
 	else
-		scale_x = (IMG_WDTH /*- 2 * START_X_IMG*/) / (fdf->nb_cols - 1);
+	{
+		limit1 = -cos((double)(M_PI / 6)) * fdf->nb_rows;
+		limit2 = cos((double)(M_PI / 6)) * fdf->nb_cols;
+		scale_x = (IMG_WDTH - 2 * X_SHIFT) / (int)(limit2 - limit1);
+	}
 	if (fdf->nb_rows == 1)
 		scale_y = 0xFFFFFFFF;
 	else
-		scale_y = (IMG_HGHT /*- 2 * START_Y_IMG*/) / (fdf->nb_rows- 1);
-	fdf->base_scale = (scale_x > scale_y ? scale_y / 2 : scale_x / 2);
+	{
+		limit1 = 0;
+		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows); 
+		scale_y = (IMG_HGHT - 2 * Y_SHIFT) / (int)(limit2 - limit1);
+	}
+	fdf->base_scale = (scale_x > scale_y ? scale_y : scale_x);
 }
 
 int			init_fdf(t_fdf *fdf)
@@ -87,6 +102,7 @@ int			init_fdf(t_fdf *fdf)
 	if (!(fdf->vtcs_2d = (t_vertex *)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
 		return ((print_sys_error(errno)));
 	compute_base_scale(fdf);
+	compute_shifts(fdf);
 	fdf->mods.scale_coef = 1;
 	fdf->mods.alt_mod = 1;
 	reinit_matrices(fdf);

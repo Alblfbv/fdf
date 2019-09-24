@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:18:38 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:03:35 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define IMG_HGHT 1000
 # define START_X_IMG 530
 # define START_Y_IMG 220
+# define X_SHIFT (0.1 * IMG_WDTH)
+# define Y_SHIFT (0.17 * IMG_HGHT)
 # define MOVE_DELTA 10
 # define TRANS_DELTA 15
 # define ROT_DELTA (M_PI / 36) 
