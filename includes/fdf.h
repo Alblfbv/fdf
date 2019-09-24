@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:06:51 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:18:38 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ typedef struct	s_fdf
 	int			base_scale;
 	int			shift_x;
 	int			shift_y;
+	int			mlx_off;
 	t_mlx		mlx;
 	t_edge		*edges;
 	t_vertex	*vtcs_3d;

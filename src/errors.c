@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:37:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/16 15:03:50 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:20:38 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		print_usage(void)
 {
-	ft_putstr_fd("usage: fdf [map]\n", 2);
+	ft_putstr_fd("usage: ./fdf [map]\n", 2);
 	return (1);
 }
 
@@ -28,7 +28,7 @@ int		print_sys_error(int errnum)
 
 int		print_input_error(int errnum)
 {
-	ft_putstr_fd("fdf: error ", 2);
+	ft_putstr_fd("fdf: error: ", 2);
 	if (errnum == 1)
 		ft_putstr_fd("Not an int value\n", 2);
 	if (errnum == 2)
@@ -38,7 +38,7 @@ int		print_input_error(int errnum)
 
 int		print_mlx_error(int errnum)
 {
-	ft_putstr_fd("fdf: error ", 2);
+	ft_putstr_fd("fdf: error: ", 2);
 	if (errnum == 1)
 		ft_putstr_fd("Couldn't initialize MinilibX\n", 2);
 	if (errnum == 2)

@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 12:32:10 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 16:49:40 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:19:47 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	free_list(t_lines *lines)
 		
 void	free_fdf(t_fdf *fdf)
 {
-	mlx_destroy_image(fdf->mlx.mlx_ptr, fdf->mlx.img.img_ptr);
-	mlx_destroy_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr);
+	if (!fdf->mlx_off)
+	{
+		mlx_destroy_image(fdf->mlx.mlx_ptr, fdf->mlx.img.img_ptr);
+		mlx_destroy_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr);
+	}
 //	voir s il y a un mlx quit
 	ft_memdel((void**)&(fdf->edges));
 	ft_memdel((void**)&(fdf->vtcs_3d));

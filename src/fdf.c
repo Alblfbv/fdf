@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 17:47:05 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:18:38 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		main(int ac, char **av)
 		mlx_hook(fdf.mlx.win_ptr, KEY_PRESS, 0, &handle_key_events, &fdf);
 		mlx_loop(fdf.mlx.mlx_ptr);
 	}
+	fdf.mlx_off = 1;
 	free_fdf(&fdf);
 	return (ret);
 }
