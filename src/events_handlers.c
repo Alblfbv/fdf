@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:00 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 16:45:23 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 12:31:12 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int		handle_key_events(int keycode, t_fdf *fdf)
 		&handle_scale_events}, {ALT_M, &handle_alt_events}, {ALT_P,\
 		&handle_alt_events}, {ISO, &handle_proj_events}, {OTHER,\
 		&handle_proj_events}, {ALIASING, &handle_draw_mode_event},\
-		{RESET, &handle_reset_event}, {QUIT, &handle_quit_event}}; 
+		{RESET, &handle_reset_event}, {QUIT, &handle_quit_event},\
+		{MOVE_U, &handle_move_events}, {MOVE_D, &handle_move_events},\
+		{MOVE_L, &handle_move_events}, {MOVE_R, &handle_move_events}};
 	int				i;
 
 	i = -1;

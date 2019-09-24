@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projection_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 15:29:37 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 17:41:14 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 12:32:09 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	transform_coor(t_fdf *fdf)
 			+ fdf->mtx.tmp_mtx[1][3] * 1;
 		fdf->vtcs_2d[index].z = fdf->vtcs_3d[index].z * fdf->mods.alt_mod;
 	}
-}	
+}
 
 /*	fdf->vtcs_2d[i].z = fdf->vtcs_3d[i].z * fdf->mods.altitude_mod;le z sera important
 	au moment de calculer la projection, il ne faut pas utiliser celui de la matrice 3d
@@ -65,7 +65,7 @@ static void		multiply_matrices(double tmp_mtx[4][4], double factor_mtx[4][4])
 	}
 	copy_mtx(tmp_mtx, product_mtx);
 }
-	
+
 void			compute_tmp_matrix(t_fdf *fdf)
 {
 //	static double	***mtces = {&fdf->mtx.scale_mtx,
@@ -73,7 +73,7 @@ void			compute_tmp_matrix(t_fdf *fdf)
 //		&fdf->mtx.rot_z_mtx, &fdf->mtx.proj_mtx}
 //	double			**tmp_mtx;
 //	int				mtx;
-   
+
 //	mtx = -1;
 //	while (++mtx < 6)
 	copy_mtx(fdf->mtx.tmp_mtx, fdf->mtx.alt_mtx);
@@ -83,4 +83,5 @@ void			compute_tmp_matrix(t_fdf *fdf)
 	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.rot_y_mtx);
 	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.rot_z_mtx);
 	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.proj_mtx);
+	multiply_matrices(fdf->mtx.tmp_mtx, fdf->mtx.move_mtx);
 }

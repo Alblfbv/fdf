@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_handlers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:12 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 18:37:18 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 12:21:02 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int		handle_trans_events(int keycode, t_fdf *fdf)
 		{
 			if (i < 2)
 				fdf->mods.trans_x += (!(i % 2) ?\
-						-TRANS_DELTA : TRANS_DELTA) % 180;
+						-TRANS_DELTA : TRANS_DELTA);
 			else if (i < 4)
 				fdf->mods.trans_y += (!(i % 2) ?\
-						-TRANS_DELTA : TRANS_DELTA) % 180;
+						-TRANS_DELTA : TRANS_DELTA);
 			else
 				fdf->mods.trans_z += (!(i % 2) ?\
-						-TRANS_DELTA : TRANS_DELTA) % 180;
+						-TRANS_DELTA : TRANS_DELTA);
 			break ;
 		}
 	reinit_trans_matrix(fdf);

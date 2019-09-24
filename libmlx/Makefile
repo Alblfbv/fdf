@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 12:30:08 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/14 17:07:55 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/24 13:02:18 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB_PATH = ./../libft
 LIB_HEADER_NAME = libft.h
 LIB_HEADER_PATH = $(addprefix $(LIB_PATH)/, includes)
 LIB_NAME = libft.a
-LIB_HEADER = $(addprefix $(LIB_HEADER_PATH)/, $(LIB_HEADER_NAME)) 
+LIB_HEADER = $(addprefix $(LIB_HEADER_PATH)/, $(LIB_HEADER_NAME))
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 
 SRC_NAME = l_mlx_is_on_plan.c\
@@ -72,5 +72,5 @@ fclean: 	clean
 
 re:			fclean all
 
-#.SILENT:	$(OBJ) $(NAME) all clean fclean re
-.PHONY:	all clean fclean re 
+.SILENT:	$(OBJ) $(NAME) all clean fclean re
+.PHONY:		all clean fclean re

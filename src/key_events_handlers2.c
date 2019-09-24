@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events_handlers2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:14:01 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 18:05:56 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 12:35:31 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,26 @@ int			handle_quit_event(int keycode, t_fdf *fdf)
 	(void)keycode;
 	free_fdf(fdf);
 	exit (0);
+}
+
+int		handle_move_events(int keycode, t_fdf *fdf)
+{
+	static int	tab[4] = {MOVE_L, MOVE_R, MOVE_U, MOVE_D};
+	int			i;
+
+	i = -1;
+	while (++i < 4)
+		if (tab[i] == keycode)
+		{
+			if (i < 2)
+				fdf->mods.move_x += (!(i % 2) ?\
+						-MOVE_DELTA : MOVE_DELTA);
+			else
+				fdf->mods.move_y += (!(i % 2) ?\
+						-MOVE_DELTA : MOVE_DELTA);
+			break ;
+		}
+	reinit_move_matrix(fdf);
+	display_object_routine(fdf);
+	return (0);
 }

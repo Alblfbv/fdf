@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 19:02:22 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 12:32:27 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 # include "libft.h"
 # include "libmlx.h"
 
-# define WIN_WDTH 2560 
+# define WIN_WDTH 2560
 # define WIN_HGHT 1440
 # define IMG_WDTH 1500
 # define IMG_HGHT 1000
 # define START_X_IMG 530
 # define START_Y_IMG 220
+# define MOVE_DELTA 10
 # define TRANS_DELTA 15
 # define ROT_DELTA 5
 # define SCALE_DELTA 0.1
@@ -42,6 +43,10 @@
 # define BROWN_ALT 10
 # define WHITE_INT 0xFFFFFFFF
 # define WHITE_ALT 20
+# define MOVE_L 123 // LEFT_ARROW
+# define MOVE_R 124 // RIGHT_ARROW
+# define MOVE_U 126 // UP_ARROW
+# define MOVE_D 125 // DOWN_ARROW
 # define X_ROT_L 89 //7
 # define X_ROT_R 92 //9
 # define Y_ROT_L 86 //4
@@ -63,7 +68,7 @@
 # define ALIASING 20//3
 # define RESET 51 //del
 # define QUIT 53 //esc
-# define EVENTS_NB 21 //nombre a actualiser
+# define EVENTS_NB 25 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
 # define COLOR_BG 0x1375FF
@@ -112,15 +117,17 @@ typedef struct	s_color_alt
 
 typedef struct	s_modifiers
 {
+	double			alt_mod;
+	double			scale_coef;
 	int				trans_x;
 	int				trans_y;
 	int				trans_z;
 	int				rot_x;
 	int				rot_y;
 	int				rot_z;
-	double			scale_coef;
-	double			alt_mod;
 	t_projection	proj;
+	int				move_x;
+	int				move_y;
 	t_draw_mode		draw_mode;
 }				t_modifiers;
 
@@ -133,6 +140,7 @@ typedef struct	s_matrices
 	double	rot_y_mtx[4][4];
 	double	rot_z_mtx[4][4];
 	double	proj_mtx[4][4];
+	double	move_mtx[4][4];
 	double	tmp_mtx[4][4];
 }				t_matrices;
 
@@ -190,6 +198,7 @@ int			init_fdf(t_fdf *fdf);
 
 void		reinit_matrices(t_fdf *fdf);
 void		reinit_alt_matrix(t_fdf *fdf);
+void		reinit_move_matrix(t_fdf *fdf);
 void		reinit_proj_matrix(t_fdf *fdf);
 void		reinit_trans_matrix(t_fdf *fdf);
 void		reinit_scale_matrix(t_fdf *fdf);
@@ -202,7 +211,6 @@ void		transform_coor(t_fdf *fdf);
 /*
 ** drawing functions
 */
-
 
 void		display_object_routine(t_fdf *fdf);
 void		draw_object(t_fdf *fdf);
@@ -220,6 +228,7 @@ int			handle_key_events(int keycode, t_fdf *fdf);
 int			handle_rot_events(int keycode, t_fdf *fdf);
 int			handle_scale_events(int keycode, t_fdf *fdf);
 int			handle_trans_events(int keycode, t_fdf *fdf);
+int			handle_move_events(int keycode, t_fdf *fdf);
 int			handle_proj_events(int keycode, t_fdf *fdf);
 int			handle_alt_events(int keycode, t_fdf *fdf);
 int			handle_draw_mode_event(int keycode, t_fdf *fdf);

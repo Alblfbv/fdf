@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+         #
+#    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/23 17:26:49 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/24 13:03:47 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf 
+NAME = fdf
 
 LIB_PATH = ./libft
 
@@ -36,14 +36,14 @@ LIB_PATH = ./libft
 LIB_HEADER_NAME = libft.h
 LIB_HEADER_PATH = $(addprefix $(LIB_PATH)/, includes)
 LIB_NAME = libft.a
-LIB_HEADER = $(addprefix $(LIB_HEADER_PATH)/, $(LIB_HEADER_NAME)) 
+LIB_HEADER = $(addprefix $(LIB_HEADER_PATH)/, $(LIB_HEADER_NAME))
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 
 LIB_MLX_PATH = ./libmlx
 LIB_MLX_HEADER_NAME = libmlx.h
 LIB_MLX_HEADER_PATH = $(addprefix $(LIB_MLX_PATH)/, includes)
 LIB_MLX_NAME = libmlx.a
-LIB_MLX_HEADER = $(addprefix $(LIB_MLX_HEADER_PATH)/, $(LIB_MLX_HEADER_NAME)) 
+LIB_MLX_HEADER = $(addprefix $(LIB_MLX_HEADER_PATH)/, $(LIB_MLX_HEADER_NAME))
 LIB_MLX = $(addprefix $(LIB_MLX_PATH)/, $(LIB_MLX_NAME))
 
 
@@ -74,22 +74,27 @@ $(NAME): $(OBJ)
 	@make -C libft/
 	@make -C libmlx/
 	$(CC) $(CCFLAGS) $^ -o $@ $(LIB) $(LIB_MLX) $(MLX_FLAGS)
+	@echo "made fdf"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CCFLAGS) $(CPPFLAGS) -I$(LIB_HEADER_PATH) -I$(LIB_MLX_HEADER_PATH) -o $@ -c $<
 
-#-I$(LIB_HEADER_PATH) $(LIB) -I$(LIB_MLX_HEADER_PATH) $(LIB_MLX) 
+#-I$(LIB_HEADER_PATH) $(LIB) -I$(LIB_MLX_HEADER_PATH) $(LIB_MLX)
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 
 clean:
+	@echo "cleaned fdf"
 	@make clean -C libft/
+	@make clean -C libmlx/
 	@rm -f $(OBJ) $(OBJ:.o=.d)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
 fclean: clean
+	@echo "fcleaned fdf"
 	@make fclean -C libft/
+	@make fclean -C libmlx/
 	@rm -f $(NAME)
 
 re: fclean
@@ -99,6 +104,7 @@ norme:
 	norminette $(SRC)
 	norminette $(HEADER_PATH)
 
-.PHONY: lib make clean fclean re san
+.PHONY:		lib make clean fclean re san
+.SILENT:	$(OBJ) $(NAME) all clean fclean re
 
 -include $(OBJ:.o=.d)
