@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:03:35 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:11:55 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define Y_SHIFT (0.17 * IMG_HGHT)
 # define MOVE_DELTA 10
 # define TRANS_DELTA 15
-# define ROT_DELTA (M_PI / 36) 
+# define ROT_DELTA (M_PI / 36)
 # define SCALE_DELTA 0.1
 # define ALTITUDE_DELTA 0.1
 # define NB_COLORS 5
@@ -66,8 +66,8 @@
 # define ALT_M 84 //2
 # define ALT_P 91 //8
 # define ISO 18 //!
-# define OTHER 19 //@
-# define ALIASING 20//3
+# define CABINET 19 // @
+# define ALIASING 21 // 4
 # define RESET 51 //del
 # define QUIT 53 //esc
 # define EVENTS_NB 25 //nombre a actualiser
@@ -82,7 +82,7 @@
 typedef enum	e_projection
 {
 	iso,
-	other,
+	cabinet,
 }				t_projection;
 
 typedef enum	e_draw_mode
