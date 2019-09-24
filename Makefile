@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/24 13:03:47 by allefebv         ###   ########.fr        #
+#    Updated: 2019/09/24 14:36:57 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_NAME = fdf.c\
 		   parsing.c\
 		   init_fdf.c\
 		   reinit_matrices.c\
+		   reinit_matrices_proj.c\
 		   projection_process.c\
 		   draw_object.c\
 		   draw_object_utils.c\
