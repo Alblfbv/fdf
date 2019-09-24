@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_object.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 10:00:53 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/23 17:24:27 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:22:51 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	compute_intermediate(t_point_alt *start, t_point_alt *end,\
 	t_color_alt	*tab;
 	double		percentage;
 
-	tab = tab_color_alt(); 
+	tab = tab_color_alt();
 	tmp->z = tab[start->interval].altitude;
 	tmp->point.color = tab[start->interval].color;
 	percentage = ft_percentage((tmp->z - start->z), (end->z - start->z));
-	tmp->point.x = start->point.x + percentage * (end->point.x - start->point.x);	
-	tmp->point.y = start->point.y + percentage * (end->point.y - start->point.y);	
+	tmp->point.x = start->point.x + percentage * (end->point.x - start->point.x);
+	tmp->point.y = start->point.y + percentage * (end->point.y - start->point.y);
 }
 
 static int	compute_color(t_point_alt *point, int endian)
@@ -84,7 +84,7 @@ void		draw_object(t_fdf *fdf)
 	while (++i < fdf->nb_edges)
 	{
 		start.point.x = fdf->vtcs_2d[fdf->edges[i].vtx_1].x;
-		start.point.y = fdf->vtcs_2d[fdf->edges[i].vtx_1].y; 
+		start.point.y = fdf->vtcs_2d[fdf->edges[i].vtx_1].y;
 		start.z = fdf->vtcs_2d[fdf->edges[i].vtx_1].z;
 		end.point.x = fdf->vtcs_2d[fdf->edges[i].vtx_2].x;
 		end.point.y = fdf->vtcs_2d[fdf->edges[i].vtx_2].y;
@@ -92,8 +92,8 @@ void		draw_object(t_fdf *fdf)
 		if (start.z > end.z)
 			swap_points(&start, &end);
 		draw_line(fdf, &start, &end, fdf->mods.draw_mode);
-	}	
-}	
+	}
+}
 
 void	display_object_routine(t_fdf *fdf)
 {

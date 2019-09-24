@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:18:38 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:49:57 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,34 @@ static void	display_tabs(t_fdf *fdf)
 	}
 }
 */
+
+static void	draw_img_border(void *mlx_ptr, void *win_ptr)
+{
+	t_ptrs	ptrs;
+	t_point	top_left;
+	t_point top_right;
+	t_point	bot_left;
+	t_point	bot_right;
+
+	ptrs.mlx_ptr = mlx_ptr;
+	ptrs.win_ptr = win_ptr;
+	top_left.x = START_X_IMG - 1;
+	top_left.y = START_Y_IMG - 1;
+	top_left.color = 0xC70D00;
+	top_right.x = START_X_IMG + IMG_WDTH;
+	top_right.y = START_Y_IMG - 1;
+	top_right.color = 0xC70D00;
+	bot_left.x = START_X_IMG - 1;
+	bot_left.y = START_Y_IMG + IMG_HGHT;
+	bot_left.color = 0xC70D00;
+	bot_right.x = START_X_IMG + IMG_WDTH;
+	bot_right.y = START_Y_IMG + IMG_HGHT;
+	bot_right.color = 0xC70D00;
+	l_mlx_line_win_bresenham(&ptrs, top_left, top_right, 0);
+	l_mlx_line_win_bresenham(&ptrs, bot_left, bot_right, 0);
+	l_mlx_line_win_bresenham(&ptrs, top_left, bot_left, 0);
+	l_mlx_line_win_bresenham(&ptrs, top_right, bot_right, 0);
+}
 
 void	draw_background(void *mlx_ptr, void *win_ptr)
 {
@@ -71,6 +99,7 @@ void	draw_background(void *mlx_ptr, void *win_ptr)
 	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "reset = del");
 	y += Y_OFFSET;
 	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "quit = esc");
+	draw_img_border(mlx_ptr, win_ptr);
 }
 
 int		main(int ac, char **av)

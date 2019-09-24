@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:43:39 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:56:00 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 # define EVENTS_NB 25 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
-# define COLOR_BG 0x1375FF
+# define COLOR_BG 0x240002
 # define COLOR_WR 0xFFFFFF
 # define X_STR 10
 # define Y_STR 25

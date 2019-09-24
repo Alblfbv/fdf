@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 12:30:08 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/24 13:02:18 by allefebv         ###   ########.fr        #
+#    Updated: 2019/09/24 17:04:47 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,9 @@ SRC_NAME = l_mlx_is_on_plan.c\
 		   l_mlx_actualize_points.c\
 		   l_mlx_compute_color.c\
 		   l_mlx_compute_gradient.c\
-		   l_mlx_draw_line_xiao.c\
-		   l_mlx_draw_line_bresenham.c\
+		   l_mlx_line_img_xiao.c\
+		   l_mlx_line_img_bresenham.c\
+		   l_mlx_line_win_bresenham.c\
 		   l_mlx_is_on_plan.c\
 		   l_mlx_projections.c\
 		   l_mlx_write_pixel.c

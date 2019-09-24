@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_mlx_draw_line_bresenham.c                        :+:      :+:    :+:   */
+/*   l_mlx_line_win_bresenham.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/14 16:18:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 13:16:43 by rkirszba         ###   ########.fr       */
+/*   Created: 2019/09/24 16:12:09 by allefebv          #+#    #+#             */
+/*   Updated: 2019/09/24 16:46:58 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlx.h"
 
-static void	draw_points(t_img *img, t_point *start, t_point *end, int steep)
+static void	draw_points(t_ptrs *ptrs, t_point *start, t_point *end, int steep)
 {
 	int		dx;
 	int 	dy;
@@ -22,15 +22,14 @@ static void	draw_points(t_img *img, t_point *start, t_point *end, int steep)
 	error = (int)end->x - (int)start->x;
 	dx = error * 2;
 	dy = ((int)end->y - (int)start->y) * 2;
-	draw_point.endian = img->endian;
 	draw_point.x = (int)start->x - 1;
 	draw_point.y = start->y;
 	while (++(draw_point.x) <= end->x)
 	{
-		draw_point.color = l_mlx_compute_color(start, end, &draw_point);
+		draw_point.color = start->color;
 		if (steep)
 			ft_swap_db(&draw_point.x, &draw_point.y);
-		l_mlx_write_pixel(img, &draw_point);
+		mlx_pixel_put(ptrs->mlx_ptr, ptrs->win_ptr, draw_point.x, draw_point.y, draw_point.color);
 		if (steep)
 			ft_swap_db(&draw_point.x, &draw_point.y);
 		if ((error = error - (dy > 0 ? dy : -dy)) <= 0)
@@ -41,13 +40,39 @@ static void	draw_points(t_img *img, t_point *start, t_point *end, int steep)
 	}
 }
 
-void		l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end)
+static void	draw_points_grad(t_ptrs *ptrs, t_point *start, t_point *end, int steep)
+{
+	int		dx;
+	int 	dy;
+	int 	error;
+	t_point	draw_point;
+
+	error = (int)end->x - (int)start->x;
+	dx = error * 2;
+	dy = ((int)end->y - (int)start->y) * 2;
+	draw_point.x = (int)start->x - 1;
+	draw_point.y = start->y;
+	while (++(draw_point.x) <= end->x)
+	{
+		draw_point.color = l_mlx_compute_color(start, end, &draw_point);
+		if (steep)
+			ft_swap_db(&draw_point.x, &draw_point.y);
+		mlx_pixel_put(ptrs->mlx_ptr, ptrs->win_ptr, draw_point.x, draw_point.y, draw_point.color);
+		if (steep)
+			ft_swap_db(&draw_point.x, &draw_point.y);
+		if ((error = error - (dy > 0 ? dy : -dy)) <= 0)
+		{
+			draw_point.y += (dy > 0 ? 1 : -1);
+			error = error + dx;
+		}
+	}
+}
+
+void		l_mlx_line_win_bresenham(t_ptrs *ptrs, t_point start, t_point end,\
+	int gradient)
 {
 	int	steep;
 
-	img->size_buf = img->size_line *img->plan.y_max;
-	if (!(l_mlx_actualize_points(&start, &end, &img->plan)))
-		return ;
 	start.x = round(start.x);
 	start.y = round(start.y);
 	end.x = round(end.x);
@@ -64,5 +89,8 @@ void		l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end)
 		ft_swap_db(&start.y, &end.y);
 		ft_swap_int(&start.color, &end.color);
 	}
-	draw_points(img, &start, &end, steep);
-}	
+	if (gradient)
+		draw_points_grad(ptrs, &start, &end, steep);
+	else
+		draw_points(ptrs, &start, &end, steep);
+}
