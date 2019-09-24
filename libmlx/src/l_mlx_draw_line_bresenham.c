@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   l_mlx_draw_line_bresenham.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 16:18:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/14 17:07:54 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 13:16:43 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void	draw_points(t_img *img, t_point *start, t_point *end, int steep)
 		l_mlx_write_pixel(img, &draw_point);
 		if (steep)
 			ft_swap_db(&draw_point.x, &draw_point.y);
-		if ((error = error - dy) <= 0)
+		if ((error = error - (dy > 0 ? dy : -dy)) <= 0)
 		{
-			(draw_point.y)++;
+			draw_point.y += (dy > 0 ? 1 : -1);
 			error = error + dx;
 		}
 	}
