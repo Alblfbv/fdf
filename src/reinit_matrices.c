@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:16:34 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:59:33 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:55:35 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	reinit_rot_x_matrix(t_fdf *fdf)
 {
 	double		rot_x;
 
-	rot_x = fdf->mods.rot_x * (M_PI / 180);
+	rot_x = fdf->mods.rot_x * ROT_DELTA;
 	fdf->mtx.rot_x_mtx[0][0] = 1;
 	fdf->mtx.rot_x_mtx[0][1] = 0;
 	fdf->mtx.rot_x_mtx[0][2] = 0;
@@ -39,7 +39,7 @@ void	reinit_rot_y_matrix(t_fdf *fdf)
 {
 	double		rot_y;
 
-	rot_y = fdf->mods.rot_y * (M_PI / 180);
+	rot_y = fdf->mods.rot_y * ROT_DELTA;
 	fdf->mtx.rot_y_mtx[0][0] = cos(rot_y);
 	fdf->mtx.rot_y_mtx[0][1] = 0;
 	fdf->mtx.rot_y_mtx[0][2] = sin(rot_y);
@@ -62,7 +62,7 @@ void	reinit_rot_z_matrix(t_fdf *fdf)
 {
 	double		rot_z;
 
-	rot_z = fdf->mods.rot_z * (M_PI / 180);
+	rot_z = fdf->mods.rot_z * ROT_DELTA;
 	fdf->mtx.rot_z_mtx[0][0] = cos(rot_z);
 	fdf->mtx.rot_z_mtx[0][1] = -sin(rot_z);
 	fdf->mtx.rot_z_mtx[0][2] = 0;
@@ -178,12 +178,12 @@ void	reinit_proj_matrix(t_fdf *fdf)
 	t_projection	*proj;
 
 	proj = &fdf->mods.proj;
-	fdf->mtx.proj_mtx[0][0] = cos(M_PI / 6);
-	fdf->mtx.proj_mtx[0][1] = -cos(M_PI / 6);
+	fdf->mtx.proj_mtx[0][0] = cos((double)(M_PI / 6));
+	fdf->mtx.proj_mtx[0][1] = -cos((double)(M_PI / 6));
 	fdf->mtx.proj_mtx[0][2] = 0;
 	fdf->mtx.proj_mtx[0][3] = 0;
-	fdf->mtx.proj_mtx[1][0] = sin(M_PI / 6);
-	fdf->mtx.proj_mtx[1][1] = sin(M_PI / 6);
+	fdf->mtx.proj_mtx[1][0] = sin((double)(M_PI / 6));
+	fdf->mtx.proj_mtx[1][1] = sin((double)(M_PI / 6));
 	fdf->mtx.proj_mtx[1][2] = -1;
 	fdf->mtx.proj_mtx[1][3] = 0;
 	fdf->mtx.proj_mtx[2][0] = 0;

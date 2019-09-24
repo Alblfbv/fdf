@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:56:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/14 17:07:56 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/24 13:33:47 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	draw_limit(t_img *img, t_point *point, t_draw_line *line, int limit)
 	x_pxl = round(point->x);
 	y_limit = point->y + line->gradient * (x_pxl - point->x);
 	y_pxl = floor(y_limit);
-	x_gap = ft_rfpart(point->x + 0.5); //ATTENTION DISPONIBILITE FONCTION
+	x_gap = ft_rfpart(point->x + 0.5);
 	draw_point.color = point->color;
 	draw_point.x = line->steep ? y_pxl : x_pxl;
 	draw_point.y = line->steep ? x_pxl : y_pxl;
@@ -42,7 +42,7 @@ static void draw_middle_points(t_img *img, t_point *start, t_point *end,\
 
 	draw_point.endian = img->endian;
 	x_pxl_mid = line->x_pxl_start;
-	while (++x_pxl_mid < line->x_pxl_end)
+	while (++x_pxl_mid <= line->x_pxl_end)
 	{
 		draw_point.x = x_pxl_mid;
 		draw_point.y = floor(line->y_intrsct);

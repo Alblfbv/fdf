@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:32:27 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:06:51 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define START_Y_IMG 220
 # define MOVE_DELTA 10
 # define TRANS_DELTA 15
-# define ROT_DELTA 5
+# define ROT_DELTA (M_PI / 36) 
 # define SCALE_DELTA 0.1
 # define ALTITUDE_DELTA 0.1
 # define NB_COLORS 5

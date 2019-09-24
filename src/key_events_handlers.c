@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:12 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:21:02 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 14:43:39 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int		handle_rot_events(int keycode, t_fdf *fdf)
 		{
 			if (i < 2)
 			{
-				fdf->mods.rot_x += (!(i % 2) ? -ROT_DELTA : ROT_DELTA) % 180;
+				fdf->mods.rot_x += (!(i % 2) ? -1 : 1) % 36;
 				reinit_rot_x_matrix(fdf);
 			}
 			else if (i < 4)
 			{
-				fdf->mods.rot_y += (!(i % 2) ? -ROT_DELTA : ROT_DELTA) % 180;
+				fdf->mods.rot_y += (!(i % 2) ? -1 : 1) % 36;
 				reinit_rot_y_matrix(fdf);
 			}
 			else
 			{
-				fdf->mods.rot_z += (!(i % 2) ? -ROT_DELTA : ROT_DELTA) % 180;
+				fdf->mods.rot_z += (!(i % 2) ? -1 : 1) % 36;
 				reinit_rot_z_matrix(fdf);
 			}
 			break ;
