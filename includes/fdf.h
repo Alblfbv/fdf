@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 13:34:37 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 16:45:50 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@
 # define RED_BUTTON 17
 # define COLOR_BG 0x000F28
 # define COLOR_WR 0xFFFFFF
-# define X_STR 10
-# define Y_STR 25
-# define Y_OFFSET 40
+# define X_MARGIN 10
+# define Y_MARGIN 200
+# define Y_BLOCK 70
+# define Y_TITLE 30
+# define Y_LINE 15
+
 
 typedef enum	e_projection
 {
@@ -216,7 +219,7 @@ void		transform_coor(t_fdf *fdf);
 
 void		display_object_routine(t_fdf *fdf);
 void		draw_object(t_fdf *fdf);
-void		draw_menu(t_mlx *mlx);
+void		draw_menu(t_ptrs *ptrs);
 void		swap_points(t_point_alt *p1, t_point_alt *p2);
 int			give_interval(double z1);
 t_color_alt	*tab_color_alt(void);
