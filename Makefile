@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/24 14:36:57 by allefebv         ###   ########.fr        #
+#    Updated: 2019/09/25 15:37:46 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_NAME = fdf.c\
 		   reinit_matrices_proj.c\
 		   projection_process.c\
 		   draw_object.c\
+		   draw_menu.c\
 		   draw_object_utils.c\
 		   events_handlers.c\
 		   key_events_handlers.c\
