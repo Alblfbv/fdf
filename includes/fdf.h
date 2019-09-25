@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 16:47:56 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 17:00:30 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,19 @@ typedef enum	e_draw_mode
 	xiaolin,
 }				t_draw_mode;
 
+typedef enum	e_color_mode
+{
+	unicolor,
+	polycolor,
+}				t_color_mode;	
+
+typedef enum	e_color_set
+{
+	geo,
+	neon,
+	psyche,
+}				t_color_set;
+
 typedef struct	s_vertex
 {
 	double	x;
@@ -134,6 +147,8 @@ typedef struct	s_modifiers
 	int				move_x;
 	int				move_y;
 	t_draw_mode		draw_mode;
+	t_color_set		color_set;
+	t_color_mode	color_mode;
 }				t_modifiers;
 
 typedef struct	s_matrices
