@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 15:30:24 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:51:58 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 13:05:40 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	l_mlx_write_pixel_pct(t_img *img, t_point *point, double percentage)
 	t_point	draw_point;
 
 	draw_point = *point;
+	percentage = sqrt(percentage);
 	if (img->endian == BIG)
 		draw_point.color = l_mlx_compute_color_big(0, point->color, percentage);
 	else
