@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 16:49:57 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 15:04:36 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,36 @@ static void	display_tabs(t_fdf *fdf)
 }
 */
 
-static void	draw_img_border(void *mlx_ptr, void *win_ptr)
+static void	draw_img_border(t_mlx *mlx)
 {
-	t_ptrs	ptrs;
 	t_point	top_left;
 	t_point top_right;
 	t_point	bot_left;
 	t_point	bot_right;
 
-	ptrs.mlx_ptr = mlx_ptr;
-	ptrs.win_ptr = win_ptr;
 	top_left.x = START_X_IMG - 1;
 	top_left.y = START_Y_IMG - 1;
-	top_left.color = 0xC70D00;
+	top_left.color = 0x00f9ff;
+	top_left.endian = mlx->img.endian;
 	top_right.x = START_X_IMG + IMG_WDTH;
 	top_right.y = START_Y_IMG - 1;
-	top_right.color = 0xC70D00;
+	top_right.color = 0x00f9ff;
+	top_right.endian = mlx->img.endian;
 	bot_left.x = START_X_IMG - 1;
 	bot_left.y = START_Y_IMG + IMG_HGHT;
-	bot_left.color = 0xC70D00;
+	bot_left.color = 0x00f9ff;
+	bot_left.endian = mlx->img.endian;
 	bot_right.x = START_X_IMG + IMG_WDTH;
 	bot_right.y = START_Y_IMG + IMG_HGHT;
-	bot_right.color = 0xC70D00;
-	l_mlx_line_win_bresenham(&ptrs, top_left, top_right, 0);
-	l_mlx_line_win_bresenham(&ptrs, bot_left, bot_right, 0);
-	l_mlx_line_win_bresenham(&ptrs, top_left, bot_left, 0);
-	l_mlx_line_win_bresenham(&ptrs, top_right, bot_right, 0);
+	bot_right.color = 0x00f9ff;
+	bot_right.endian = mlx->img.endian;
+	l_mlx_line_win_bresenham(&mlx->ptrs, top_left, top_right);
+	l_mlx_line_win_bresenham(&mlx->ptrs, bot_left, bot_right);
+	l_mlx_line_win_bresenham(&mlx->ptrs, top_left, bot_left);
+	l_mlx_line_win_bresenham(&mlx->ptrs, top_right, bot_right);
 }
 
-void	draw_background(void *mlx_ptr, void *win_ptr)
+void	draw_background(t_mlx *mlx)
 {
 	int	x;
 	int	y;
@@ -70,36 +71,9 @@ void	draw_background(void *mlx_ptr, void *win_ptr)
 	{
 		x = -1;
 		while (++x < WIN_WDTH)
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, COLOR_BG);
+			mlx_pixel_put(mlx->ptrs.mlx_ptr, mlx->ptrs.win_ptr, x, y, COLOR_BG);
 	}
-	x = X_STR;
-	y = Y_STR;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "zoom = + or -");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "X-axis rotation = 7 or 9");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "Y-axis rotation = 4 or 6");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "Z-axis rotation = 1 or 3");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "X-axis move = q or w");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "Y-axis move = a or s");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "Z-axis move = z or x");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "altitude change = 2 or 8");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "isometric proj = !");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "other proj = @");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "antialiasing mode on / off = #");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "reset = del");
-	y += Y_OFFSET;
-	mlx_string_put(mlx_ptr, win_ptr, x, y, COLOR_WR, "quit = esc");
-	draw_img_border(mlx_ptr, win_ptr);
+	draw_img_border(mlx);
 }
 
 int		main(int ac, char **av)
@@ -120,12 +94,12 @@ int		main(int ac, char **av)
 //		display_tabs(&fdf);
 	if (!ret)
 	{
-		draw_background(fdf.mlx.mlx_ptr, fdf.mlx.win_ptr);
+		draw_background(&fdf.mlx);
 		display_object_routine(&fdf);
-		mlx_hook(fdf.mlx.win_ptr, RED_BUTTON, 0, &handle_quit_event_mouse\
+		mlx_hook(fdf.mlx.ptrs.win_ptr, RED_BUTTON, 0, &handle_quit_event_mouse\
 			, &fdf);
-		mlx_hook(fdf.mlx.win_ptr, KEY_PRESS, 0, &handle_key_events, &fdf);
-		mlx_loop(fdf.mlx.mlx_ptr);
+		mlx_hook(fdf.mlx.ptrs.win_ptr, KEY_PRESS, 0, &handle_key_events, &fdf);
+		mlx_loop(fdf.mlx.ptrs.mlx_ptr);
 	}
 	fdf.mlx_off = 1;
 	free_fdf(&fdf);
