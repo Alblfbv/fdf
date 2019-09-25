@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 12:44:29 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 16:18:46 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,27 @@ static int	init_edges_tab(t_fdf *fdf)
 
 static void	compute_shifts(t_fdf *fdf)
 {
-	fdf->shift_x = -((int)(-cos((double)(M_PI / 6)) * fdf->nb_rows * fdf->base_scale)) + X_SHIFT;
-	fdf->shift_y = Y_SHIFT;
+	double	limit1;
+	double	limit2;
+
+	if (fdf->nb_cols == 1)
+		fdf->shift_x = IMG_WDTH / 2;
+	else
+	{
+		limit1 = -cos((double)(M_PI / 6)) * fdf->nb_rows * fdf->base_scale;
+		limit2 = cos((double)(M_PI / 6)) * fdf->nb_cols * fdf->base_scale;
+		fdf->shift_x = (int)(-limit1) + (IMG_WDTH - (int)(limit2 - limit1)) / 2;
+	}
+	if (fdf->nb_rows == 1)
+		fdf->shift_y = IMG_HGHT / 2;
+	else
+	{
+		limit1 = 0;
+		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows) * fdf->base_scale;
+		fdf->shift_y = (IMG_HGHT - (int)(limit2 - limit1)) / 2;
+	}
+//	fdf->shift_x = -((int)(-cos((double)(M_PI / 6)) * fdf->nb_rows * fdf->base_scale)) + X_SHIFT;
+//	fdf->shift_y = Y_SHIFT;
 }
 
 static void	compute_base_scale(t_fdf *fdf)

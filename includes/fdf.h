@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 13:34:37 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 15:25:17 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,5 @@ int			print_usage(void);
 int			print_sys_error(int errnum);
 int			print_input_error(int errnum);
 int			print_mlx_error(int errnum);
-
 
 #endif
