@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:59:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 16:46:32 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/24 19:18:08 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct	s_draw_line
 
 void	l_mlx_draw_line_xiaolin(t_img *img, t_point start, t_point end);
 void	l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end);
-void	l_mlx_line_win_bresenham(t_ptrs *ptrs, t_point start, t_point end, int gradient);
+void	l_mlx_line_win_bresenham(t_ptrs *ptrs, t_point start, t_point end);
 void	l_mlx_write_pixel(t_img *img, t_point *point);
 void	l_mlx_write_pixel_pct(t_img *img, t_point *point, double percentage);
 int		l_mlx_compute_color();

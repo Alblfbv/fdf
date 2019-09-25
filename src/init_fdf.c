@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:50:31 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 12:44:29 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	init_mlx(t_fdf *fdf)
 {
-	if (!(fdf->mlx.mlx_ptr = mlx_init()))
+	if (!(fdf->mlx.ptrs.mlx_ptr = mlx_init()))
 		return (print_mlx_error(1));
-	if (!(fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_WDTH,\
-				WIN_HGHT, "fdf")))
-		return (print_mlx_error(2));	
-	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr,\
+	if (!(fdf->mlx.ptrs.win_ptr = mlx_new_window(fdf->mlx.ptrs.mlx_ptr,\
+		WIN_WDTH, WIN_HGHT, "fdf")))
+		return (print_mlx_error(2));
+	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
 				IMG_WDTH, IMG_HGHT)))
 		return (print_mlx_error(3));
 	fdf->mlx.img.buf = mlx_get_data_addr (fdf->mlx.img.img_ptr,\
@@ -47,19 +47,19 @@ static int	init_edges_tab(t_fdf *fdf)
 	{
 		if ((ind_vtx + 1) % fdf->nb_cols)
 		{
-			fdf->edges[ind_edges].vtx_1 = ind_vtx; 
-			fdf->edges[ind_edges].vtx_2 = ind_vtx + 1; 
+			fdf->edges[ind_edges].vtx_1 = ind_vtx;
+			fdf->edges[ind_edges].vtx_2 = ind_vtx + 1;
 			ind_edges++;
 		}
 		if (ind_vtx + fdf->nb_cols < fdf->nb_vertices)
 		{
-			fdf->edges[ind_edges].vtx_1 = ind_vtx; 
+			fdf->edges[ind_edges].vtx_1 = ind_vtx;
 			fdf->edges[ind_edges].vtx_2 = ind_vtx + fdf->nb_cols;
 			ind_edges++;
 		}
 	}
 	return (0);
-}	
+}
 
 static void	compute_shifts(t_fdf *fdf)
 {
@@ -87,7 +87,7 @@ static void	compute_base_scale(t_fdf *fdf)
 	else
 	{
 		limit1 = 0;
-		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows); 
+		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows);
 		scale_y = (IMG_HGHT - 2 * Y_SHIFT) / (int)(limit2 - limit1);
 	}
 	fdf->base_scale = (scale_x > scale_y ? scale_y : scale_x);

@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:14:29 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 13:34:37 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include "libmlx.h"
 
 # define WIN_WDTH 2560
-# define WIN_HGHT 1440
-# define IMG_WDTH 1500
-# define IMG_HGHT 1000
-# define START_X_IMG 530
-# define START_Y_IMG 220
+# define WIN_HGHT 1400
+# define START_X_IMG 0
+# define START_Y_IMG 80
+# define IMG_WDTH (WIN_WDTH - START_X_IMG)
+# define IMG_HGHT (WIN_HGHT - (START_Y_IMG * 2))
 # define X_SHIFT (0.1 * IMG_WDTH)
 # define Y_SHIFT (0.17 * IMG_HGHT)
 # define MOVE_DELTA 10
@@ -73,7 +73,7 @@
 # define EVENTS_NB 25 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
-# define COLOR_BG 0x240002
+# define COLOR_BG 0x000F28
 # define COLOR_WR 0xFFFFFF
 # define X_STR 10
 # define Y_STR 25
@@ -148,8 +148,7 @@ typedef struct	s_matrices
 
 typedef struct	s_mlx
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	t_ptrs	ptrs;
 	t_img	img;
 }				t_mlx;
 
@@ -217,6 +216,7 @@ void		transform_coor(t_fdf *fdf);
 
 void		display_object_routine(t_fdf *fdf);
 void		draw_object(t_fdf *fdf);
+void		draw_menu(t_mlx *mlx);
 void		swap_points(t_point_alt *p1, t_point_alt *p2);
 int			give_interval(double z1);
 t_color_alt	*tab_color_alt(void);

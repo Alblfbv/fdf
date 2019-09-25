@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 10:00:53 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 16:22:51 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 13:31:32 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	display_object_routine(t_fdf *fdf)
 	compute_tmp_matrix(fdf);
 	transform_coor(fdf);
 	draw_object(fdf);
-	mlx_put_image_to_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr,\
+	mlx_put_image_to_window(fdf->mlx.ptrs.mlx_ptr, fdf->mlx.ptrs.win_ptr,\
 		fdf->mlx.img.img_ptr, START_X_IMG, START_Y_IMG);
+	draw_menu(&fdf->mlx);
 	ft_bzero(fdf->mlx.img.buf, sizeof(char) * fdf->mlx.img.size_buf);
 }
