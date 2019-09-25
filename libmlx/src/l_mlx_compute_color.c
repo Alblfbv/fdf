@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 19:23:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 12:34:04 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:09:21 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,21 @@ unsigned char	l_mlx_compute_sub_color(unsigned char sub1, unsigned char sub2, do
 int		l_mlx_compute_color_big(int color1, int color2, double percentage)
 {
 	t_subcolors	subcolors;
-	int			new_color;
-	void		*ptr;
 
-	new_color = 0;
 	subcolors.red = l_mlx_compute_sub_color((unsigned char)(color1 >> 16 & 0xFF), (unsigned char)(color2 >> 16 & 0xFF), percentage);
 	subcolors.green = l_mlx_compute_sub_color((unsigned char)(color1 >> 8 & 0xFF), (unsigned char)(color2 >> 8 & 0xFF), percentage);
 	subcolors.blue = l_mlx_compute_sub_color((unsigned char)(color1 & 0xFF), (unsigned char)(color2 & 0xFF), percentage);
-	ptr = &new_color;
-	ft_memcpy(ptr + 1, &(subcolors.red), sizeof(char));
-	ft_memcpy(ptr + 2, &(subcolors.green), sizeof(char));
-	ft_memcpy(ptr + 3, &(subcolors.blue), sizeof(char));
-	return (new_color);
+	return (l_mlx_sub_to_color(subcolors, BIG));
 }
 
 int		l_mlx_compute_color_little(int color1, int color2, double percentage)
 {
 	t_subcolors	subcolors;
-	int			new_color;
-	void		*ptr;
 
-	new_color = 0;
 	subcolors.red = l_mlx_compute_sub_color((unsigned char)(color1 >> 16 & 0xFF), (unsigned char)(color2 >> 16 & 0xFF), percentage);
 	subcolors.green = l_mlx_compute_sub_color((unsigned char)(color1 >> 8 & 0xFF), (unsigned char)(color2 >> 8 & 0xFF), percentage);
 	subcolors.blue = l_mlx_compute_sub_color((unsigned char)(color1 & 0xFF), (unsigned char)(color2 & 0xFF), percentage);
-	ptr = &new_color;
-	ft_memcpy(ptr + 2, &(subcolors.red), sizeof(char));
-	ft_memcpy(ptr + 1, &(subcolors.green), sizeof(char));
-	ft_memcpy(ptr, &(subcolors.blue), sizeof(char));
-	return (new_color);
+	return (l_mlx_sub_to_color(subcolors, LITTLE));
 }
 
 int		l_mlx_compute_color(t_point *start, t_point *end, t_point *curr)

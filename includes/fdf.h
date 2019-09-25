@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 17:00:30 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:00:47 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@
 # define MOVE_DELTA 10
 # define TRANS_DELTA 15
 # define ROT_DELTA (M_PI / 36)
+# define COL_DELTA 5
 # define SCALE_DELTA 0.1
 # define ALTITUDE_DELTA 0.1
 # define NB_COLORS 5
+# define NB_SET 3
 # define DEEP_BLUE_INT 0x042295
 # define DEEP_BLUE_ALT (-10)
 # define LIGHT_BLUE_INT 0x45B5FF
@@ -45,6 +47,12 @@
 # define BROWN_ALT 10
 # define WHITE_INT 0xFFFFFFFF
 # define WHITE_ALT 20
+# define RED_M 15 // R
+# define RED_P 17 // T
+# define GREEN_M 5 // G
+# define GREEN_P 4 // H
+# define BLUE_M 11 // B
+# define BLUE_P 45 // N
 # define MOVE_L 123 // LEFT_ARROW
 # define MOVE_R 124 // RIGHT_ARROW
 # define MOVE_U 126 // UP_ARROW
@@ -70,7 +78,7 @@
 # define ALIASING 21 // 4
 # define RESET 51 //del
 # define QUIT 53 //esc
-# define EVENTS_NB 25 //nombre a actualiser
+# define EVENTS_NB 31 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
 # define COLOR_BG 0x000F28
@@ -168,6 +176,7 @@ typedef struct	s_mlx
 {
 	t_ptrs	ptrs;
 	t_img	img;
+	t_img	bg_img;
 }				t_mlx;
 
 typedef struct	s_fdf
@@ -186,6 +195,8 @@ typedef struct	s_fdf
 	t_vertex	*vtcs_2d;
 	t_modifiers	mods;
 	t_matrices	mtx;
+	t_subcolors	wireframe_col;
+	t_color_alt	color_tabs[NB_SET][NB_COLORS];
 }				t_fdf;
 
 typedef struct	s_lines
@@ -234,6 +245,7 @@ void		transform_coor(t_fdf *fdf);
 
 void		display_object_routine(t_fdf *fdf);
 void		draw_object(t_fdf *fdf);
+void		draw_background(t_fdf *fdf);
 void		draw_menu(t_ptrs *ptrs);
 void		swap_points(t_point_alt *p1, t_point_alt *p2);
 int			give_interval(double z1);
@@ -253,6 +265,7 @@ int			handle_move_events(int keycode, t_fdf *fdf);
 int			handle_proj_events(int keycode, t_fdf *fdf);
 int			handle_alt_events(int keycode, t_fdf *fdf);
 int			handle_draw_mode_event(int keycode, t_fdf *fdf);
+int			handle_rgb_events(int keycode, t_fdf *fdf);
 int			handle_reset_event(int keycode, t_fdf *fdf);
 int			handle_quit_event(int keycode, t_fdf *fdf);
 int			handle_quit_event_mouse(t_fdf *fdf);

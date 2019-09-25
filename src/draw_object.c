@@ -6,11 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 10:00:53 by rkirszba          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2019/09/25 16:43:02 by allefebv         ###   ########.fr       */
-=======
-/*   Updated: 2019/09/25 16:58:17 by rkirszba         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2019/09/25 19:00:45 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +89,13 @@ void		draw_object(t_fdf *fdf)
 		end.point.x = fdf->vtcs_2d[fdf->edges[i].vtx_2].x;
 		end.point.y = fdf->vtcs_2d[fdf->edges[i].vtx_2].y;
 		end.z = fdf->vtcs_2d[fdf->edges[i].vtx_2].z;
+		if (fdf->mods.color_mode == unicolor)
+		{
+			start.point.color = l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
+			end.point.color = start.point.color;
+			l_mlx_draw_line_xiaolin(&fdf->mlx.img, start.point, end.point);
+			continue ;
+		}
 		if (start.z > end.z)
 			swap_points(&start, &end);
 		draw_line(fdf, &start, &end, fdf->mods.draw_mode);
@@ -103,9 +106,13 @@ void	display_object_routine(t_fdf *fdf)
 {
 	compute_tmp_matrix(fdf);
 	transform_coor(fdf);
+	draw_background(fdf);
 	draw_object(fdf);
+	mlx_put_image_to_window(fdf->mlx.ptrs.mlx_ptr, fdf->mlx.ptrs.win_ptr,\
+		fdf->mlx.bg_img.img_ptr, 0, 0);
 	mlx_put_image_to_window(fdf->mlx.ptrs.mlx_ptr, fdf->mlx.ptrs.win_ptr,\
 		fdf->mlx.img.img_ptr, START_X_IMG, START_Y_IMG);
 	draw_menu(&fdf->mlx.ptrs);
 	ft_bzero(fdf->mlx.img.buf, sizeof(char) * fdf->mlx.img.size_buf);
+	ft_bzero(fdf->mlx.bg_img.buf, sizeof(char) * fdf->mlx.bg_img.size_buf);
 }

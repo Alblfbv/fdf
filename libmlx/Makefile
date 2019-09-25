@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 12:30:08 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/24 17:04:47 by allefebv         ###   ########.fr        #
+#    Updated: 2019/09/25 17:18:38 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 SRC_NAME = l_mlx_is_on_plan.c\
 		   l_mlx_utils_proj.c\
 		   l_mlx_actualize_points.c\
+		   l_mlx_sub_to_color.c\
 		   l_mlx_compute_color.c\
 		   l_mlx_compute_gradient.c\
 		   l_mlx_line_img_xiao.c\

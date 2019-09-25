@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/25 15:37:46 by allefebv         ###   ########.fr        #
+#    Updated: 2019/09/25 18:14:52 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_NAME = fdf.c\
 		   events_handlers.c\
 		   key_events_handlers.c\
 		   key_events_handlers2.c\
+		   key_events_handlers3.c\
 		   free_functions.c\
 		   errors.c
 

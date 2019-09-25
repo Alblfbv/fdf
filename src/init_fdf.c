@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 16:18:46 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:47:52 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,25 @@ static int	init_mlx(t_fdf *fdf)
 	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
 				IMG_WDTH, IMG_HGHT)))
 		return (print_mlx_error(3));
-	fdf->mlx.img.buf = mlx_get_data_addr (fdf->mlx.img.img_ptr,\
+	if (!(fdf->mlx.bg_img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
+				WIN_WDTH, WIN_HGHT)))
+		return (print_mlx_error(3));
+	fdf->mlx.img.buf = mlx_get_data_addr(fdf->mlx.img.img_ptr,\
 		&fdf->mlx.img.bits_per_pixel, &fdf->mlx.img.size_line,\
 		&fdf->mlx.img.endian);
+	fdf->mlx.bg_img.buf = mlx_get_data_addr(fdf->mlx.bg_img.img_ptr,\
+		&fdf->mlx.bg_img.bits_per_pixel, &fdf->mlx.bg_img.size_line,\
+		&fdf->mlx.bg_img.endian);
+	fdf->mlx.img.size_buf = IMG_WDTH * IMG_HGHT * 4;
+	fdf->mlx.bg_img.size_buf = WIN_WDTH * WIN_HGHT * 4;
 	fdf->mlx.img.plan.x_min = 0;
 	fdf->mlx.img.plan.x_max = IMG_WDTH - 1;
 	fdf->mlx.img.plan.y_min = 0;
 	fdf->mlx.img.plan.y_max = IMG_HGHT - 1;
+	fdf->mlx.bg_img.plan.x_min = 0;
+	fdf->mlx.bg_img.plan.x_max = WIN_WDTH - 1;
+	fdf->mlx.bg_img.plan.y_min = 0;
+	fdf->mlx.bg_img.plan.y_max = WIN_HGHT - 1;
 	return (0);
 }
 
@@ -122,6 +134,9 @@ int			init_fdf(t_fdf *fdf)
 		return ((print_sys_error(errno)));
 	compute_base_scale(fdf);
 	compute_shifts(fdf);
+	fdf->wireframe_col.red = 0xFF;
+	fdf->wireframe_col.green = 0xFF;
+	fdf->wireframe_col.blue = 0xFF;
 	fdf->mods.scale_coef = 1;
 	fdf->mods.alt_mod = 1;
 	reinit_matrices(fdf);

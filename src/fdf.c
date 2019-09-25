@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 15:37:57 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:00:48 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	display_tabs(t_fdf *fdf)
 }
 */
 
-static void	draw_img_border(t_mlx *mlx)
+static void	draw_img_border(t_fdf *fdf, int wire_color)
 {
 	t_point	top_left;
 	t_point top_right;
@@ -41,39 +41,62 @@ static void	draw_img_border(t_mlx *mlx)
 
 	top_left.x = START_X_IMG - 1;
 	top_left.y = START_Y_IMG - 1;
-	top_left.color = 0x00f9ff;
-	top_left.endian = mlx->img.endian;
+	top_left.color = wire_color;
+	top_left.endian = fdf->mlx.img.endian;
 	top_right.x = START_X_IMG + IMG_WDTH;
 	top_right.y = START_Y_IMG - 1;
-	top_right.color = 0x00f9ff;
-	top_right.endian = mlx->img.endian;
+	top_right.color = wire_color;
+	top_right.endian = fdf->mlx.img.endian;
 	bot_left.x = START_X_IMG - 1;
 	bot_left.y = START_Y_IMG + IMG_HGHT;
-	bot_left.color = 0x00f9ff;
-	bot_left.endian = mlx->img.endian;
+	bot_left.color = wire_color;
+	bot_left.endian = fdf->mlx.img.endian;
 	bot_right.x = START_X_IMG + IMG_WDTH;
 	bot_right.y = START_Y_IMG + IMG_HGHT;
-	bot_right.color = 0x00f9ff;
-	bot_right.endian = mlx->img.endian;
-	l_mlx_line_win_bresenham(&mlx->ptrs, top_left, top_right);
-	l_mlx_line_win_bresenham(&mlx->ptrs, bot_left, bot_right);
-	l_mlx_line_win_bresenham(&mlx->ptrs, top_left, bot_left);
-	l_mlx_line_win_bresenham(&mlx->ptrs, top_right, bot_right);
+	bot_right.color = wire_color;
+	bot_right.endian = fdf->mlx.img.endian;
+	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, top_left, top_right);
+	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, bot_left, bot_right);
+	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, top_left, bot_left);
+	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, top_right, bot_right);
 }
 
-void	draw_background(t_mlx *mlx)
+void	draw_background(t_fdf *fdf)
 {
 	int	x;
 	int	y;
+	int	background_color;
+	int	wire_color;
+	t_point	point;
 
+	wire_color = l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
+	background_color = fdf->mlx.img.endian == LITTLE ?\
+		l_mlx_compute_color_little(0, wire_color, 0.4) :\
+		l_mlx_compute_color_big(0, wire_color, 0.4);
 	y = -1;
+	point.color = background_color;
+	while (++y < START_Y_IMG)
+	{
+		x = -1;
+		point.y = y;
+		while (++x < WIN_WDTH)
+		{
+			point.x = x; 
+			l_mlx_write_pixel(&fdf->mlx.bg_img, &point);		
+		}
+	}
+	y = START_Y_IMG + IMG_HGHT - 1;
 	while (++y < WIN_HGHT)
 	{
 		x = -1;
+		point.y = y;
 		while (++x < WIN_WDTH)
-			mlx_pixel_put(mlx->ptrs.mlx_ptr, mlx->ptrs.win_ptr, x, y, COLOR_BG);
+		{
+			point.x = x; 
+			l_mlx_write_pixel(&fdf->mlx.bg_img, &point);		
+		}
 	}
-	draw_img_border(mlx);
+	draw_img_border(fdf, wire_color);
 }
 
 int		main(int ac, char **av)
@@ -94,7 +117,6 @@ int		main(int ac, char **av)
 //		display_tabs(&fdf);
 	if (!ret)
 	{
-		draw_background(&fdf.mlx);
 		display_object_routine(&fdf);
 		mlx_hook(fdf.mlx.ptrs.win_ptr, RED_BUTTON, 0, &handle_quit_event_mouse\
 			, &fdf);

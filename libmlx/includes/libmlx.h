@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:59:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 19:18:08 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 17:19:23 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end);
 void	l_mlx_line_win_bresenham(t_ptrs *ptrs, t_point start, t_point end);
 void	l_mlx_write_pixel(t_img *img, t_point *point);
 void	l_mlx_write_pixel_pct(t_img *img, t_point *point, double percentage);
-int		l_mlx_compute_color();
 int		l_mlx_actualize_points(t_point *start, t_point *end, t_plan *plan);
 int		check_projection(t_point *var_point, t_point *ref_point, t_plan *plan);
 int		l_mlx_is_x_on_plan(double x, t_plan *plan);
 int		l_mlx_is_y_on_plan(double y, t_plan *plan);
 int		l_mlx_is_on_plan(t_point *point, t_plan *plan);
 int		l_mlx_compute_color(t_point *start, t_point *end, t_point *curr);
+int		l_mlx_sub_to_color(t_subcolors sub, int endian);
 unsigned char	l_mlx_compute_sub_color(unsigned char sub1, unsigned char sub2, double percentage);
 int		l_mlx_compute_color_big(int color1, int color2, double percentage);
 int		l_mlx_compute_color_little(int color1, int color2, double percentage);
