@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 19:00:47 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 20:20:49 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@
 # define COLOR_BG 0x000F28
 # define COLOR_WR 0xFFFFFF
 # define X_MARGIN 10
-# define Y_MARGIN 200
-# define Y_BLOCK 70
-# define Y_TITLE 30
-# define Y_LINE 15
+# define Y_MARGIN 100
+# define BLOCK_SPACE 70
+# define TITLE_SPACE 30
+# define LINE_SPACE 15
 
 
 typedef enum	e_projection
@@ -106,7 +106,7 @@ typedef enum	e_color_mode
 {
 	unicolor,
 	polycolor,
-}				t_color_mode;	
+}				t_color_mode;
 
 typedef enum	e_color_set
 {
@@ -154,6 +154,7 @@ typedef struct	s_modifiers
 	t_projection	proj;
 	int				move_x;
 	int				move_y;
+	int				col_updt;
 	t_draw_mode		draw_mode;
 	t_color_set		color_set;
 	t_color_mode	color_mode;
@@ -176,7 +177,8 @@ typedef struct	s_mlx
 {
 	t_ptrs	ptrs;
 	t_img	img;
-	t_img	bg_img;
+	t_img	bg_img_top;
+	t_img	bg_img_bot;
 }				t_mlx;
 
 typedef struct	s_fdf

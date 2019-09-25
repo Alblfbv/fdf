@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:14:01 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 12:35:31 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:53:17 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			handle_reset_event(int keycode, t_fdf *fdf)
 	ft_bzero(&fdf->mods, sizeof(t_modifiers));
 	fdf->mods.scale_coef = 1;
 	fdf->mods.alt_mod = 1;
+	fdf->mods.col_updt = 1;
+	ft_memset(&fdf->wireframe_col, 255, sizeof(t_subcolors));
 	reinit_matrices(fdf);
 	display_object_routine(fdf);
 	return (0);
@@ -67,10 +69,10 @@ int		handle_move_events(int keycode, t_fdf *fdf)
 		{
 			if (i < 2)
 				fdf->mods.move_x += (!(i % 2) ?\
-						-MOVE_DELTA : MOVE_DELTA);
+						MOVE_DELTA : -MOVE_DELTA);
 			else
 				fdf->mods.move_y += (!(i % 2) ?\
-						-MOVE_DELTA : MOVE_DELTA);
+						MOVE_DELTA : -MOVE_DELTA);
 			break ;
 		}
 	reinit_move_matrix(fdf);

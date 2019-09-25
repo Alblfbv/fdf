@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 18:47:52 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/25 19:42:06 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,38 @@ static int	init_mlx(t_fdf *fdf)
 		WIN_WDTH, WIN_HGHT, "fdf")))
 		return (print_mlx_error(2));
 	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
-				IMG_WDTH, IMG_HGHT)))
+		IMG_WDTH, IMG_HGHT)))
 		return (print_mlx_error(3));
-	if (!(fdf->mlx.bg_img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
-				WIN_WDTH, WIN_HGHT)))
+	if (!(fdf->mlx.bg_img_top.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
+		WIN_WDTH, START_Y_IMG)))
+		return (print_mlx_error(3));
+	if (!(fdf->mlx.bg_img_bot.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
+		WIN_WDTH, WIN_HGHT - START_Y_IMG - IMG_HGHT)))
 		return (print_mlx_error(3));
 	fdf->mlx.img.buf = mlx_get_data_addr(fdf->mlx.img.img_ptr,\
 		&fdf->mlx.img.bits_per_pixel, &fdf->mlx.img.size_line,\
 		&fdf->mlx.img.endian);
-	fdf->mlx.bg_img.buf = mlx_get_data_addr(fdf->mlx.bg_img.img_ptr,\
-		&fdf->mlx.bg_img.bits_per_pixel, &fdf->mlx.bg_img.size_line,\
-		&fdf->mlx.bg_img.endian);
+	fdf->mlx.bg_img_top.buf = mlx_get_data_addr(fdf->mlx.bg_img_top.img_ptr,\
+		&fdf->mlx.bg_img_top.bits_per_pixel, &fdf->mlx.bg_img_top.size_line,\
+		&fdf->mlx.bg_img_top.endian);
+	fdf->mlx.bg_img_bot.buf = mlx_get_data_addr(fdf->mlx.bg_img_bot.img_ptr,\
+		&fdf->mlx.bg_img_bot.bits_per_pixel, &fdf->mlx.bg_img_bot.size_line,\
+		&fdf->mlx.bg_img_bot.endian);
 	fdf->mlx.img.size_buf = IMG_WDTH * IMG_HGHT * 4;
-	fdf->mlx.bg_img.size_buf = WIN_WDTH * WIN_HGHT * 4;
+	fdf->mlx.bg_img_top.size_buf = WIN_WDTH * START_Y_IMG * 4;
+	fdf->mlx.bg_img_bot.size_buf = WIN_WDTH * (WIN_HGHT - START_Y_IMG - IMG_HGHT) * 4;
 	fdf->mlx.img.plan.x_min = 0;
 	fdf->mlx.img.plan.x_max = IMG_WDTH - 1;
 	fdf->mlx.img.plan.y_min = 0;
 	fdf->mlx.img.plan.y_max = IMG_HGHT - 1;
-	fdf->mlx.bg_img.plan.x_min = 0;
-	fdf->mlx.bg_img.plan.x_max = WIN_WDTH - 1;
-	fdf->mlx.bg_img.plan.y_min = 0;
-	fdf->mlx.bg_img.plan.y_max = WIN_HGHT - 1;
+	fdf->mlx.bg_img_top.plan.x_min = 0;
+	fdf->mlx.bg_img_top.plan.x_max = WIN_WDTH - 1;
+	fdf->mlx.bg_img_top.plan.y_min = 0;
+	fdf->mlx.bg_img_top.plan.y_max = START_Y_IMG;
+	fdf->mlx.bg_img_bot.plan.x_min = 0;
+	fdf->mlx.bg_img_bot.plan.x_max = WIN_WDTH - 1;
+	fdf->mlx.bg_img_bot.plan.y_min = 0;
+	fdf->mlx.bg_img_bot.plan.y_max = WIN_HGHT - START_Y_IMG - IMG_HGHT;
 	return (0);
 }
 
@@ -139,6 +150,7 @@ int			init_fdf(t_fdf *fdf)
 	fdf->wireframe_col.blue = 0xFF;
 	fdf->mods.scale_coef = 1;
 	fdf->mods.alt_mod = 1;
+	fdf->mods.col_updt = 1;
 	reinit_matrices(fdf);
 	return (0);
 }
