@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 20:20:49 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:18:27 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,46 @@
 # define ALTITUDE_DELTA 0.1
 # define NB_COLORS 5
 # define NB_SET 3
-# define DEEP_BLUE_INT 0x042295
-# define DEEP_BLUE_ALT (-10)
-# define LIGHT_BLUE_INT 0x45B5FF
-# define LIGHT_BLUE_ALT (-5)
-# define GREEN_INT 0x00FF00
-# define GREEN_ALT 1
-# define BROWN_INT 0xAD6924
-# define BROWN_ALT 10
-# define WHITE_INT 0xFFFFFFFF
-# define WHITE_ALT 20
-# define RED_M 15 // R
-# define RED_P 17 // T
-# define GREEN_M 5 // G
-# define GREEN_P 4 // H
-# define BLUE_M 11 // B
-# define BLUE_P 45 // N
+
+# define SET0_COL0_INT 0x042295
+# define SET0_COL0_ALT (-15)
+# define SET0_COL1_INT 0x45B5FF
+# define SET0_COL1_ALT (0)
+# define SET0_COL2_INT 0x00FF00
+# define SET0_COL2_ALT 1
+# define SET0_COL3_INT 0xAD6924
+# define SET0_COL3_ALT 10
+# define SET0_COL4_INT 0xFFFFFFFF
+# define SET0_COL4_ALT 18
+
+# define SET1_COL0_INT 0x08F7FE
+# define SET1_COL0_ALT (-10)
+# define SET1_COL1_INT 0x09FBD3
+# define SET1_COL1_ALT (-5)
+# define SET1_COL2_INT 0xFE53BB
+# define SET1_COL2_ALT 1
+# define SET1_COL3_INT 0xF5D300
+# define SET1_COL3_ALT 10
+# define SET1_COL4_INT 0xAB9EFF
+# define SET1_COL4_ALT 20
+
+# define SET2_COL0_INT 0x00A9FE
+# define SET2_COL0_ALT (-2)
+# define SET2_COL1_INT 0xC24CF6
+# define SET2_COL1_ALT (1)
+# define SET2_COL2_INT 0xFF1493
+# define SET2_COL2_ALT 4
+# define SET2_COL3_INT 0xFC6E22
+# define SET2_COL3_ALT 7
+# define SET2_COL4_INT 0xFFFF66
+# define SET2_COL4_ALT 12
+
+# define RED_M 14 // E
+# define RED_P 15 // R
+# define GREEN_M 3 // F
+# define GREEN_P 5 // G
+# define BLUE_M 9 // V
+# define BLUE_P 11 // B
 # define MOVE_L 123 // LEFT_ARROW
 # define MOVE_R 124 // RIGHT_ARROW
 # define MOVE_U 126 // UP_ARROW
@@ -78,7 +102,10 @@
 # define ALIASING 21 // 4
 # define RESET 51 //del
 # define QUIT 53 //esc
-# define EVENTS_NB 31 //nombre a actualiser
+# define UNICOLOR 33 // [
+# define POLYCOLOR 30 // ]
+# define COLOR_SET 42 // '\'
+# define EVENTS_NB 34 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
 # define COLOR_BG 0x000F28
@@ -250,7 +277,7 @@ void		draw_object(t_fdf *fdf);
 void		draw_background(t_fdf *fdf);
 void		draw_menu(t_ptrs *ptrs);
 void		swap_points(t_point_alt *p1, t_point_alt *p2);
-int			give_interval(double z1);
+int			give_interval(t_fdf *fdf, double z);
 t_color_alt	*tab_color_alt(void);
 void		draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
 			t_draw_mode draw_mode);
@@ -270,6 +297,8 @@ int			handle_draw_mode_event(int keycode, t_fdf *fdf);
 int			handle_rgb_events(int keycode, t_fdf *fdf);
 int			handle_reset_event(int keycode, t_fdf *fdf);
 int			handle_quit_event(int keycode, t_fdf *fdf);
+int			handle_colmod_events(int keycode, t_fdf *fdf);
+int			handle_colset_event(int keycode, t_fdf *fdf);
 int			handle_quit_event_mouse(t_fdf *fdf);
 
 /*

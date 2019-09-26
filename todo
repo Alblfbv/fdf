@@ -6,13 +6,13 @@ Vitesse :
 -Routines : background (compute et putimg) que si :
 	-modif r/g/b -> OK
 	-reset -> OK
-	-changement color_mode
+	-changement color_mode -> OK
 
 Polycolor :
--Tout
+-OK
 
 Menu :
--Ajouter options -> OK
+-Ajouter options : Ajouter cycle set
 -Inverser evenements move -> OK
 
 Projections :

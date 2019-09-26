@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_object_utils.cc                               :+:      :+:    :+:   */
+/*   draw_object_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:00:06 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 19:00:46 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 14:28:18 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_color_alt	*tab_color_alt(void)
+int			give_interval(t_fdf *fdf, double z)
 {
-	static t_color_alt	tab[NB_COLORS] = {{DEEP_BLUE_INT, DEEP_BLUE_ALT},\
-		{LIGHT_BLUE_INT, LIGHT_BLUE_ALT}, {GREEN_INT, GREEN_ALT},\
-		{BROWN_INT, BROWN_ALT}, {WHITE_INT, WHITE_ALT}};
-	
-	return (tab);
-}
+	int	i;
 
-int			give_interval(double z1)
-{
-	if (z1 < DEEP_BLUE_ALT)
+	i = -1;
+	while (++i < NB_COLORS)
+		if (z < fdf->color_tabs[fdf->mods.color_set][i].altitude)
+			return (i);
+	return (NB_COLORS);
+	/*
+	if (z < fdf->color_tabs[fdf->mods.color_set])
 		return (0);
-	if (z1 >= DEEP_BLUE_ALT && z1 < LIGHT_BLUE_ALT)
+	if (z >= DEEP_BLUE_ALT && z < LIGHT_BLUE_ALT)
 		return (1);
-	if (z1 >= LIGHT_BLUE_ALT && z1 < GREEN_ALT)
+	if (z >= LIGHT_BLUE_ALT && z < GREEN_ALT)
 		return (2);
-	if (z1 >= GREEN_ALT && z1 < BROWN_ALT)
+	if (z >= GREEN_ALT && z < BROWN_ALT)
 		return (3);
-	if (z1 >= BROWN_ALT && z1 < WHITE_ALT)
+	if (z >= BROWN_ALT && z < WHITE_ALT)
 		return (4);
 	return (5);
+	*/
 }
 
 void		swap_points(t_point_alt *p1, t_point_alt *p2)

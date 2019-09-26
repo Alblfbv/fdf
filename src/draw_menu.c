@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:32:20 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/25 20:20:41 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:19:32 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ static void	menu_colors(t_ptrs *ptrs, t_point *point)
 	fdf_putstr(ptrs, point, "COLOR MODIFICATION COMMANDS", LINE_SPACE);
 	fdf_putstr(ptrs, point, "-----------------------------", TITLE_SPACE);
 	fdf_putstr(ptrs, point, "UNICOLOR MODE ---  -> [", LINE_SPACE);
-	fdf_putstr(ptrs, point, "red ++ -> t", LINE_SPACE);
-	fdf_putstr(ptrs, point, "red -- -> r", LINE_SPACE);
-	fdf_putstr(ptrs, point, "green ++ -> h", LINE_SPACE);
-	fdf_putstr(ptrs, point, "green -- -> g", LINE_SPACE);
-	fdf_putstr(ptrs, point, "blue ++ -> n", LINE_SPACE);
-	fdf_putstr(ptrs, point, "blue -- -> b", TITLE_SPACE);
+	fdf_putstr(ptrs, point, "red ++ -> r", LINE_SPACE);
+	fdf_putstr(ptrs, point, "red -- -> e", LINE_SPACE);
+	fdf_putstr(ptrs, point, "green ++ -> g", LINE_SPACE);
+	fdf_putstr(ptrs, point, "green -- -> f", LINE_SPACE);
+	fdf_putstr(ptrs, point, "blue ++ -> b", LINE_SPACE);
+	fdf_putstr(ptrs, point, "blue -- -> v", TITLE_SPACE);
 	fdf_putstr(ptrs, point, "POLYCOLORS --- -> ]", LINE_SPACE);
-	fdf_putstr(ptrs, point, "cycle through -> /", BLOCK_SPACE);
+	fdf_putstr(ptrs, point, "cycle through -> \\", BLOCK_SPACE);
 }
 
 void	draw_menu(t_ptrs *ptrs)

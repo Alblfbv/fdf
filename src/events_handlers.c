@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:00 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 17:29:41 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 13:52:51 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int		handle_key_events(int keycode, t_fdf *fdf)
 		{MOVE_L, &handle_move_events}, {MOVE_R, &handle_move_events},\
 		{RED_M, &handle_rgb_events}, {RED_P, &handle_rgb_events},\
 		{GREEN_M, &handle_rgb_events}, {GREEN_P, &handle_rgb_events},\
-		{BLUE_M, &handle_rgb_events}, {BLUE_P, &handle_rgb_events}};
+		{BLUE_M, &handle_rgb_events}, {BLUE_P, &handle_rgb_events},\
+		{UNICOLOR, &handle_colmod_events}, {POLYCOLOR, &handle_colmod_events},\
+		{COLOR_SET, &handle_colset_event}};
 	int				i;
 
 	i = -1;

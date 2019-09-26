@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 20:23:21 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 14:26:37 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void	draw_background(t_fdf *fdf)
 	int	wire_color;
 	t_point	point;
 
-	wire_color = l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
+	if (fdf->mods.color_mode == unicolor)
+		wire_color = l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
+	else
+		wire_color = fdf->color_tabs[fdf->mods.color_set][2].color;
 	background_color = fdf->mlx.img.endian == LITTLE ?\
 		l_mlx_compute_color_little(0, wire_color, 0.15) :\
 		l_mlx_compute_color_big(0, wire_color, 0.15);
