@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 15:29:37 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:06:50 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:21:51 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ void	transform_coor(t_fdf *fdf)
 			+ fdf->mtx.tmp_mtx[0][1] * tmp_point.y\
 			+ fdf->mtx.tmp_mtx[0][2] * tmp_point.z\
 			+ fdf->mtx.tmp_mtx[0][3] * 1;
-	//		+ 400;
 		fdf->vtcs_2d[index].y = fdf->mtx.tmp_mtx[1][0] * tmp_point.x
 			+ fdf->mtx.tmp_mtx[1][1] * tmp_point.y\
 			+ fdf->mtx.tmp_mtx[1][2] * tmp_point.z\
 			+ fdf->mtx.tmp_mtx[1][3] * 1;
-	//		+ 200;
 		fdf->vtcs_2d[index].z = fdf->vtcs_3d[index].z * fdf->mods.alt_mod;
 	}
 }

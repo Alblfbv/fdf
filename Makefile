@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/25 18:14:52 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/26 16:36:29 by rkirszba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,10 +54,10 @@ OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CC = gcc
-CCFLAGS = -g\
-		  -Wall\
+CCFLAGS = -Wall\
 		  -Wextra\
 		  -Werror\
+#		  -g\
 #		  -fsanitize=address
 
 CPPFLAGS = -I $(HEADER_PATH) -MMD
