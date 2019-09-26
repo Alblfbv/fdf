@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:32:20 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/26 15:19:32 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:35:33 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	menu_options(t_ptrs *ptrs, t_point *point)
 	fdf_putstr(ptrs, point, "-----------------------------", TITLE_SPACE);
 	fdf_putstr(ptrs, point, "PROJECTION MODES ---", LINE_SPACE);
 	fdf_putstr(ptrs, point, "isometric -> !", LINE_SPACE);
-	fdf_putstr(ptrs, point, "cavalier -> @", TITLE_SPACE);
+	fdf_putstr(ptrs, point, "cavalier-> @", LINE_SPACE);
+	fdf_putstr(ptrs, point, "cabinet-> #", TITLE_SPACE);
 	fdf_putstr(ptrs, point, "ANTIALIASING ---", LINE_SPACE);
 	fdf_putstr(ptrs, point, "on / off -> $", BLOCK_SPACE);
 }

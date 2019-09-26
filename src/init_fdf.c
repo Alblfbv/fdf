@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 13:05:35 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:46:00 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ static void	compute_shifts(t_fdf *fdf)
 		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows) * fdf->base_scale;
 		fdf->shift_y = (IMG_HGHT - (int)(limit2 - limit1)) / 2;
 	}
-//	fdf->shift_x = -((int)(-cos((double)(M_PI / 6)) * fdf->nb_rows * fdf->base_scale)) + X_SHIFT;
-//	fdf->shift_y = Y_SHIFT;
 }
 
 static void	compute_base_scale(t_fdf *fdf)
@@ -194,9 +192,7 @@ int			init_fdf(t_fdf *fdf)
 		return ((print_sys_error(errno)));
 	compute_base_scale(fdf);
 	compute_shifts(fdf);
-	fdf->wireframe_col.red = 0xFF;
-	fdf->wireframe_col.green = 0xFF;
-	fdf->wireframe_col.blue = 0xFF;
+	ft_memset(&fdf->wireframe_col, 255, sizeof(t_subcolors));
 	fdf->mods.scale_coef = 1;
 	fdf->mods.alt_mod = 1;
 	fdf->mods.col_updt = 1;

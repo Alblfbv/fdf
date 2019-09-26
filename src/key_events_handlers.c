@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:12 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 15:01:48 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:35:48 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int		handle_trans_events(int keycode, t_fdf *fdf)
 
 int		handle_proj_events(int keycode, t_fdf *fdf)
 {
-	static int	tab[2] = {ISO, CABINET};
+	static int	tab[3] = {ISO, CAVALIER, CABINET};
 	int			i;
 
 	i = -1;
-	while (++i < 2)
+	while (++i < 3)
 		if (tab[i] == keycode)
 		{
 			fdf->mods.proj = i;

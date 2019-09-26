@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 15:18:27 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 15:37:50 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,15 @@
 # define ALT_M 84 //2
 # define ALT_P 91 //8
 # define ISO 18 //!
-# define CABINET 19 // @
+# define CAVALIER 19 // @
+# define CABINET 20 // #
 # define ALIASING 21 // 4
 # define RESET 51 //del
 # define QUIT 53 //esc
 # define UNICOLOR 33 // [
 # define POLYCOLOR 30 // ]
 # define COLOR_SET 42 // '\'
-# define EVENTS_NB 34 //nombre a actualiser
+# define EVENTS_NB 35 //nombre a actualiser
 # define KEY_PRESS 2
 # define RED_BUTTON 17
 # define COLOR_BG 0x000F28
@@ -120,6 +121,7 @@
 typedef enum	e_projection
 {
 	iso,
+	cavalier,
 	cabinet,
 }				t_projection;
 
