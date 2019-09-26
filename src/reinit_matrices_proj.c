@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 13:11:17 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/26 15:58:10 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:30:15 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ static void	proj_cavalier(t_fdf *fdf)
 {
 	fdf->mtx.proj_mtx[0][0] = 1;
 	fdf->mtx.proj_mtx[0][1] = 0;
-	//fdf->mtx.proj_mtx[0][2] = (1 / 2) * (double)(cos(M_PI / 3));
 	fdf->mtx.proj_mtx[0][2] = (double)atan(1) * (double)(cos(-M_PI / 3));
 	fdf->mtx.proj_mtx[0][3] = 0;
 	fdf->mtx.proj_mtx[1][0] = 0;
 	fdf->mtx.proj_mtx[1][1] = 1;
-	//fdf->mtx.proj_mtx[1][2] = (1/ 2) * (double)(sin(M_PI / 3));
 	fdf->mtx.proj_mtx[1][2] = (double)atan(1) * (double)(sin(-M_PI / 3));
 	fdf->mtx.proj_mtx[1][3] = 0;
 	fdf->mtx.proj_mtx[2][0] = 0;
@@ -42,7 +40,6 @@ static void	proj_cabinet(t_fdf *fdf)
 	fdf->mtx.proj_mtx[0][3] = 0;
 	fdf->mtx.proj_mtx[1][0] = 0;
 	fdf->mtx.proj_mtx[1][1] = 1;
-	//fdf->mtx.proj_mtx[1][2] = (1/ 2) * (double)(sin(M_PI / 3));
 	fdf->mtx.proj_mtx[1][2] = (double)atan(2) * (double)(sin(-M_PI / 3));
 	fdf->mtx.proj_mtx[1][3] = 0;
 	fdf->mtx.proj_mtx[2][0] = 0;
@@ -75,7 +72,7 @@ static void	proj_iso(t_fdf *fdf)
 	fdf->mtx.proj_mtx[3][3] = 1;
 }
 
-void	reinit_proj_matrix(t_fdf *fdf)
+void		reinit_proj_matrix(t_fdf *fdf)
 {
 	static void(*fptr_tab[3])(t_fdf *) = {&proj_iso,\
 		&proj_cavalier, &proj_cabinet};

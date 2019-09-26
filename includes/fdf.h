@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 15:37:50 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:41:34 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@
 # define TITLE_SPACE 30
 # define LINE_SPACE 15
 
-
 typedef enum	e_projection
 {
 	iso,
@@ -148,7 +147,7 @@ typedef struct	s_vertex
 {
 	double	x;
 	double	y;
-	double 	z;
+	double	z;
 }				t_vertex;
 
 typedef struct	s_edge
@@ -282,7 +281,7 @@ void		swap_points(t_point_alt *p1, t_point_alt *p2);
 int			give_interval(t_fdf *fdf, double z);
 t_color_alt	*tab_color_alt(void);
 void		draw_line(t_fdf *fdf, t_point_alt *start, t_point_alt *end,\
-			t_draw_mode draw_mode);
+	t_draw_mode draw_mode);
 
 /*
 ** events handlers

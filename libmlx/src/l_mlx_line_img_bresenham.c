@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_mlx_line_img_bresenham.c                        :+:      :+:    :+:   */
+/*   l_mlx_line_img_bresenham.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 16:18:32 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 13:16:43 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:08:39 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	draw_points(t_img *img, t_point *start, t_point *end, int steep)
 {
 	int		dx;
-	int 	dy;
-	int 	error;
+	int		dy;
+	int		error;
 	t_point	draw_point;
 
 	error = (int)end->x - (int)start->x;
@@ -45,7 +45,7 @@ void		l_mlx_draw_line_bresenham(t_img *img, t_point start, t_point end)
 {
 	int	steep;
 
-	img->size_buf = img->size_line *img->plan.y_max;
+	img->size_buf = img->size_line * img->plan.y_max;
 	if (!(l_mlx_actualize_points(&start, &end, &img->plan)))
 		return ;
 	start.x = round(start.x);

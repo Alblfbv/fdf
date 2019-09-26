@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:12:09 by allefebv          #+#    #+#             */
-/*   Updated: 2019/09/24 19:18:11 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:14:15 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	draw_points(t_ptrs *ptrs, t_point *start, t_point *end, int steep)
 {
 	int		dx;
-	int 	dy;
-	int 	error;
+	int		dy;
+	int		error;
 	t_point	draw_point;
 
 	error = (int)end->x - (int)start->x;
@@ -29,7 +29,8 @@ static void	draw_points(t_ptrs *ptrs, t_point *start, t_point *end, int steep)
 		draw_point.color = l_mlx_compute_color(start, end, &draw_point);
 		if (steep)
 			ft_swap_db(&draw_point.x, &draw_point.y);
-		mlx_pixel_put(ptrs->mlx_ptr, ptrs->win_ptr, draw_point.x, draw_point.y, draw_point.color);
+		mlx_pixel_put(ptrs->mlx_ptr, ptrs->win_ptr, draw_point.x,\
+			draw_point.y, draw_point.color);
 		if (steep)
 			ft_swap_db(&draw_point.x, &draw_point.y);
 		if ((error = error - (dy > 0 ? dy : -dy)) <= 0)
