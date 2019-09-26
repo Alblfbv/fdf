@@ -6,7 +6,7 @@
 /*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:16:34 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 17:21:53 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:38:34 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,17 @@ void	reinit_scale_matrix(t_fdf *fdf)
 	t_modifiers	*mods;
 
 	mods = &fdf->mods;
-	fdf->mtx.scale_mtx[0][0] = mods->scale_coef * fdf->base_scale;
+	fdf->mtx.scale_mtx[0][0] = mods->scale_coef * (double)fdf->base_scale;
 	fdf->mtx.scale_mtx[0][1] = 0;
 	fdf->mtx.scale_mtx[0][2] = 0;
 	fdf->mtx.scale_mtx[0][3] = 0;
 	fdf->mtx.scale_mtx[1][0] = 0;
-	fdf->mtx.scale_mtx[1][1] = mods->scale_coef * fdf->base_scale;
+	fdf->mtx.scale_mtx[1][1] = mods->scale_coef * (double)fdf->base_scale;
 	fdf->mtx.scale_mtx[1][2] = 0;
 	fdf->mtx.scale_mtx[1][3] = 0;
 	fdf->mtx.scale_mtx[2][0] = 0;
 	fdf->mtx.scale_mtx[2][1] = 0;
-	fdf->mtx.scale_mtx[2][2] = mods->scale_coef * fdf->base_scale;
+	fdf->mtx.scale_mtx[2][2] = mods->scale_coef * (double)fdf->base_scale;
 	fdf->mtx.scale_mtx[2][3] = 0;
 	fdf->mtx.scale_mtx[3][0] = 0;
 	fdf->mtx.scale_mtx[3][1] = 0;
@@ -135,15 +135,15 @@ void	reinit_trans_matrix(t_fdf *fdf)
 	fdf->mtx.trans_mtx[0][0] = 1;
 	fdf->mtx.trans_mtx[0][1] = 0;
 	fdf->mtx.trans_mtx[0][2] = 0;
-	fdf->mtx.trans_mtx[0][3] = mods->trans_x;
+	fdf->mtx.trans_mtx[0][3] = (double)mods->trans_x;
 	fdf->mtx.trans_mtx[1][0] = 0;
 	fdf->mtx.trans_mtx[1][1] = 1;
 	fdf->mtx.trans_mtx[1][2] = 0;
-	fdf->mtx.trans_mtx[1][3] = mods->trans_y;
+	fdf->mtx.trans_mtx[1][3] = (double)mods->trans_y;
 	fdf->mtx.trans_mtx[2][0] = 0;
 	fdf->mtx.trans_mtx[2][1] = 0;
 	fdf->mtx.trans_mtx[2][2] = 1;
-	fdf->mtx.trans_mtx[2][3] = mods->trans_z;
+	fdf->mtx.trans_mtx[2][3] = (double)mods->trans_z;
 	fdf->mtx.trans_mtx[3][0] = 0;
 	fdf->mtx.trans_mtx[3][1] = 0;
 	fdf->mtx.trans_mtx[3][2] = 0;
@@ -158,11 +158,11 @@ void	reinit_move_matrix(t_fdf *fdf)
 	fdf->mtx.move_mtx[0][0] = 1;
 	fdf->mtx.move_mtx[0][1] = 0;
 	fdf->mtx.move_mtx[0][2] = 0;
-	fdf->mtx.move_mtx[0][3] = mods->move_x + fdf->shift_x;
+	fdf->mtx.move_mtx[0][3] = (double)(mods->move_x + fdf->shift_x);
 	fdf->mtx.move_mtx[1][0] = 0;
 	fdf->mtx.move_mtx[1][1] = 1;
 	fdf->mtx.move_mtx[1][2] = 0;
-	fdf->mtx.move_mtx[1][3] = mods->move_y + fdf->shift_y;
+	fdf->mtx.move_mtx[1][3] = (double)(mods->move_y + fdf->shift_y);
 	fdf->mtx.move_mtx[2][0] = 0;
 	fdf->mtx.move_mtx[2][1] = 0;
 	fdf->mtx.move_mtx[2][2] = 1;

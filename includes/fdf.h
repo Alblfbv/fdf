@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:13:28 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 17:21:48 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:40:51 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ typedef struct	s_modifiers
 	int				move_x;
 	int				move_y;
 	int				col_updt;
+	int				last_rot;
 	t_draw_mode		draw_mode;
 	t_color_set		color_set;
 	t_color_mode	color_mode;
