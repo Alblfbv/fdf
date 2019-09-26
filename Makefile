@@ -6,7 +6,7 @@
 #    By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 12:50:11 by rkirszba          #+#    #+#              #
-#    Updated: 2019/09/26 16:36:29 by rkirszba         ###   ########.fr        #
+#    Updated: 2019/09/26 19:35:43 by allefebv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,13 @@ SRC_PATH = src
 SRC_NAME = fdf.c\
 		   parsing.c\
 		   init_fdf.c\
+		   init_fdf_colors.c\
+		   init_fdf_mlx.c\
 		   reinit_matrices.c\
+		   reinit_matrices_rot.c\
 		   reinit_matrices_proj.c\
 		   projection_process.c\
+		   draw_background.c\
 		   draw_object.c\
 		   draw_menu.c\
 		   draw_object_utils.c\
@@ -56,9 +60,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 CC = gcc
 CCFLAGS = -Wall\
 		  -Wextra\
-		  -Werror\
-#		  -g\
-#		  -fsanitize=address
+		  -Werror
 
 CPPFLAGS = -I $(HEADER_PATH) -MMD
 
@@ -81,8 +83,6 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CCFLAGS) $(CPPFLAGS) -I$(LIB_HEADER_PATH) -I$(LIB_MLX_HEADER_PATH) -o $@ -c $<
-
-#-I$(LIB_HEADER_PATH) $(LIB) -I$(LIB_MLX_HEADER_PATH) $(LIB_MLX)
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
