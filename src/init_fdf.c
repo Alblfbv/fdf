@@ -6,39 +6,26 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 16:53:55 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:15:46 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	get_images_data(t_fdf *fdf)
+static int	init_mlx_img(t_fdf *fdf, t_img *img, int img_wdth, int img_hght)
 {
-	fdf->mlx.img.buf = mlx_get_data_addr(fdf->mlx.img.img_ptr,\
-		&fdf->mlx.img.bits_per_pixel, &fdf->mlx.img.size_line,\
-		&fdf->mlx.img.endian);
-	fdf->mlx.bg_img_top.buf = mlx_get_data_addr(fdf->mlx.bg_img_top.img_ptr,\
-		&fdf->mlx.bg_img_top.bits_per_pixel, &fdf->mlx.bg_img_top.size_line,\
-		&fdf->mlx.bg_img_top.endian);
-	fdf->mlx.bg_img_bot.buf = mlx_get_data_addr(fdf->mlx.bg_img_bot.img_ptr,\
-		&fdf->mlx.bg_img_bot.bits_per_pixel, &fdf->mlx.bg_img_bot.size_line,\
-		&fdf->mlx.bg_img_bot.endian);
-	fdf->mlx.img.size_buf = IMG_WDTH * IMG_HGHT * 4;
-	fdf->mlx.bg_img_top.size_buf = WIN_WDTH * START_Y_IMG * 4;
-	fdf->mlx.bg_img_bot.size_buf = WIN_WDTH *\
-		(WIN_HGHT - START_Y_IMG - IMG_HGHT) * 4;
-	fdf->mlx.img.plan.x_min = 0;
-	fdf->mlx.img.plan.x_max = IMG_WDTH - 1;
-	fdf->mlx.img.plan.y_min = 0;
-	fdf->mlx.img.plan.y_max = IMG_HGHT - 1;
-	fdf->mlx.bg_img_top.plan.x_min = 0;
-	fdf->mlx.bg_img_top.plan.x_max = WIN_WDTH - 1;
-	fdf->mlx.bg_img_top.plan.y_min = 0;
-	fdf->mlx.bg_img_top.plan.y_max = START_Y_IMG;
-	fdf->mlx.bg_img_bot.plan.x_min = 0;
-	fdf->mlx.bg_img_bot.plan.x_max = WIN_WDTH - 1;
-	fdf->mlx.bg_img_bot.plan.y_min = 0;
-	fdf->mlx.bg_img_bot.plan.y_max = WIN_HGHT - START_Y_IMG - IMG_HGHT;
+	if (!(img->img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
+		img_wdth, img_hght)))
+		return (print_mlx_error(3));
+	img->buf = mlx_get_data_addr(img->img_ptr,\
+		&img->bits_per_pixel, &img->size_line, &img->endian);
+	img->size_buf = img_wdth * img_hght * 4;
+	img->plan.x_min = 0;
+	img->plan.y_min = 0;
+	img->plan.x_max = img_wdth;
+	img->plan.y_max = img_hght;
+	fdf->mlx_state++;
+	return (0);
 }
 
 static int	init_mlx(t_fdf *fdf)
@@ -50,19 +37,13 @@ static int	init_mlx(t_fdf *fdf)
 		WIN_WDTH, WIN_HGHT, "fdf")))
 		return (print_mlx_error(2));
 	fdf->mlx_state++;
-	if (!(fdf->mlx.img.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
-		IMG_WDTH, IMG_HGHT)))
-		return (print_mlx_error(3));
-	fdf->mlx_state++;
-	if (!(fdf->mlx.bg_img_top.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
-		WIN_WDTH, START_Y_IMG)))
-		return (print_mlx_error(3));
-	fdf->mlx_state++;
-	if (!(fdf->mlx.bg_img_bot.img_ptr = mlx_new_image(fdf->mlx.ptrs.mlx_ptr,\
-		WIN_WDTH, WIN_HGHT - START_Y_IMG - IMG_HGHT)))
-		return (print_mlx_error(3));
-	fdf->mlx_state++;
-	get_images_data(fdf);
+	if (init_mlx_img(fdf, &fdf->mlx.img, IMG_WDTH, IMG_HGHT))
+		return (1);
+	if (init_mlx_img(fdf, &fdf->mlx.bg_img_top, WIN_WDTH, START_Y_IMG))
+		return (1);
+	if (init_mlx_img(fdf, &fdf->mlx.bg_img_bot, WIN_WDTH,\
+		WIN_HGHT - START_Y_IMG - IMG_HGHT))
+		return (1);
 	return (0);
 }
 
@@ -113,15 +94,16 @@ static void	compute_shifts(t_fdf *fdf)
 	else
 	{
 		limit1 = 0;
-		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows) * fdf->base_scale;
+		limit2 = sin((double)(M_PI / 6))\
+			* (fdf->nb_cols + fdf->nb_rows) * fdf->base_scale;
 		fdf->shift_y = (IMG_HGHT - (int)(limit2 - limit1)) / 2;
 	}
 }
 
 static void	compute_base_scale(t_fdf *fdf)
 {
-	int 	scale_x;
-	int 	scale_y;
+	int		scale_x;
+	int		scale_y;
 	double	limit1;
 	double	limit2;
 
@@ -199,7 +181,8 @@ int			init_fdf(t_fdf *fdf)
 		return (1);
 	if ((init_edges_tab(fdf)))
 		return (1);
-	if (!(fdf->vtcs_2d = (t_vertex *)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
+	if (!(fdf->vtcs_2d =\
+		(t_vertex *)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
 		return ((print_sys_error(errno)));
 	compute_base_scale(fdf);
 	compute_shifts(fdf);

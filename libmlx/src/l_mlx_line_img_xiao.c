@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_mlx_line_img_xiao.c                             :+:      :+:    :+:   */
+/*   l_mlx_line_img_xiao.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:56:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 13:33:47 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:16:51 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ static void	draw_limit(t_img *img, t_point *point, t_draw_line *line, int limit)
 	l_mlx_write_pixel_pct(img, &draw_point, ft_rfpart(y_limit) * x_gap);
 	line->steep ? (draw_point.x)++ : (draw_point.y)++;
 	l_mlx_write_pixel_pct(img, &draw_point, ft_fpart(y_limit) * x_gap);
-	(limit == START) ? (line->x_pxl_start = x_pxl) : (line->x_pxl_end = x_pxl);
+	if (limit == START)
+		line->x_pxl_start = x_pxl;
+	else
+		line->x_pxl_end = x_pxl;
 }
 
-static void draw_middle_points(t_img *img, t_point *start, t_point *end,\
+static void	draw_middle_points(t_img *img, t_point *start, t_point *end,\
 	t_draw_line *line)
 {
 	t_point	draw_point;
@@ -75,11 +78,12 @@ void		l_mlx_draw_line_xiaolin(t_img *img, t_point start, t_point end)
 		ft_swap_db(&start.y, &end.y);
 		ft_swap_int(&start.color, &end.color);
 	}
-	line.gradient = (start.x == end.x) ? 1 : l_mlx_compute_gradient(&start, &end);
-	draw_limit(img, &start, &line, START); // start_limit
+	line.gradient = (start.x == end.x) ? 1\
+		: l_mlx_compute_gradient(&start, &end);
+	draw_limit(img, &start, &line, START);
 	line.y_intrsct = start.y + line.gradient * (line.x_pxl_start - start.x + 1);
 	if (start.x == end.x && start.y == end.y)
 		return ;
-	draw_limit(img, &end, &line, END); // end_limit
+	draw_limit(img, &end, &line, END);
 	draw_middle_points(img, &start, &end, &line);
 }
