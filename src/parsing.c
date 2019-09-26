@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:51:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 17:19:55 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 20:08:09 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_line(t_fdf *fdf, t_lines **lines, char *line)
 	if (!nb_cols || (fdf->nb_cols && nb_cols != fdf->nb_cols))
 	{
 		ft_free_split(split);
-		print_input_error(2);
+		return (print_input_error(2));
 	}
 	if (!fdf->nb_cols)
 		fdf->nb_cols = nb_cols;
