@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 10:00:53 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 14:29:35 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:16:50 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static void	compute_intermediate(t_fdf *fdf, t_point_alt *start,\
 	tmp->z = tab[start->interval].altitude;
 	tmp->point.color = tab[start->interval].color;
 	percentage = ft_percentage((tmp->z - start->z), (end->z - start->z));
-	tmp->point.x = start->point.x + percentage * (end->point.x - start->point.x);
-	tmp->point.y = start->point.y + percentage * (end->point.y - start->point.y);
+	tmp->point.x =\
+		start->point.x + percentage * (end->point.x - start->point.x);
+	tmp->point.y =\
+		start->point.y + percentage * (end->point.y - start->point.y);
 }
 
 static int	compute_color(t_fdf *fdf, t_point_alt *point, int endian)
@@ -56,7 +58,7 @@ void		draw_object_sublines(t_fdf *fdf, t_point_alt *start,\
 	start->z = fdf->vtcs_2d[fdf->edges[index].vtx_1].z;
 	end->z = fdf->vtcs_2d[fdf->edges[index].vtx_2].z;
 	if (start->z > end->z)
-			swap_points(start, end);
+		swap_points(start, end);
 	start->interval = give_interval(fdf, start->z);
 	start->point.color = compute_color(fdf, start, fdf->mlx.img.endian);
 	end->interval = give_interval(fdf, end->z);
@@ -93,12 +95,11 @@ void		draw_object(t_fdf *fdf)
 	t_point_alt	end;
 	int			i;
 
-	start.point.endian = fdf->mlx.img.endian;;
-	end.point.endian = fdf->mlx.img.endian;;
+	start.point.endian = fdf->mlx.img.endian;
+	end.point.endian = fdf->mlx.img.endian;
 	i = -1;
 	while (++i < fdf->nb_edges)
 	{
-
 		start.point.x = fdf->vtcs_2d[fdf->edges[i].vtx_1].x;
 		start.point.y = fdf->vtcs_2d[fdf->edges[i].vtx_1].y;
 		end.point.x = fdf->vtcs_2d[fdf->edges[i].vtx_2].x;
@@ -110,7 +111,7 @@ void		draw_object(t_fdf *fdf)
 	}
 }
 
-void	display_object_routine(t_fdf *fdf)
+void		display_object_routine(t_fdf *fdf)
 {
 	compute_tmp_matrix(fdf);
 	transform_coor(fdf);
@@ -122,8 +123,10 @@ void	display_object_routine(t_fdf *fdf)
 		mlx_put_image_to_window(fdf->mlx.ptrs.mlx_ptr, fdf->mlx.ptrs.win_ptr,\
 			fdf->mlx.bg_img_bot.img_ptr, 0, START_Y_IMG + IMG_HGHT + 1);
 		fdf->mods.col_updt = 0;
-		ft_bzero(fdf->mlx.bg_img_top.buf, sizeof(char) * fdf->mlx.bg_img_top.size_buf);
-		ft_bzero(fdf->mlx.bg_img_bot.buf, sizeof(char) * fdf->mlx.bg_img_bot.size_buf);
+		ft_bzero(fdf->mlx.bg_img_top.buf,\
+			sizeof(char) * fdf->mlx.bg_img_top.size_buf);
+		ft_bzero(fdf->mlx.bg_img_bot.buf,\
+			sizeof(char) * fdf->mlx.bg_img_bot.size_buf);
 	}
 	draw_object(fdf);
 	mlx_put_image_to_window(fdf->mlx.ptrs.mlx_ptr, fdf->mlx.ptrs.win_ptr,\

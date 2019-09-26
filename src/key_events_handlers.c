@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:12 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 15:35:48 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:13:16 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		handle_rot_events(int keycode, t_fdf *fdf)
 {
 	static int	tab[6] = {X_ROT_L, X_ROT_R, Y_ROT_L, Y_ROT_R,\
 		Z_ROT_L, Z_ROT_R};
+	static void	(*ptr_tab[3])(t_fdf *) = {&reinit_rot_x_matrix,\
+		&reinit_rot_y_matrix, &reinit_rot_z_matrix};
 	int			i;
 
 	i = -1;
@@ -23,22 +25,14 @@ int		handle_rot_events(int keycode, t_fdf *fdf)
 		if (tab[i] == keycode)
 		{
 			if (i < 2)
-			{
 				fdf->mods.rot_x += (!(i % 2) ? -1 : 1) % 36;
-				reinit_rot_x_matrix(fdf);
-			}
 			else if (i < 4)
-			{
 				fdf->mods.rot_y += (!(i % 2) ? -1 : 1) % 36;
-				reinit_rot_y_matrix(fdf);
-			}
 			else
-			{
 				fdf->mods.rot_z += (!(i % 2) ? -1 : 1) % 36;
-				reinit_rot_z_matrix(fdf);
-			}
 			break ;
 		}
+	ptr_tab[i / 2](fdf);
 	display_object_routine(fdf);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkirszba <rkirszba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:51:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/19 15:28:42 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:19:55 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	check_line(t_fdf *fdf, t_lines **lines, char *line)
 			return (print_input_error(1));
 		}
 	if (!nb_cols || (fdf->nb_cols && nb_cols != fdf->nb_cols))
-	{	
+	{
 		ft_free_split(split);
 		print_input_error(2);
 	}
@@ -60,14 +60,15 @@ static int	check_line(t_fdf *fdf, t_lines **lines, char *line)
 	return (append_line(lines, split));
 }
 
-static int copy_list_to_tab(t_fdf *fdf, t_lines *lines)
+static int	copy_list_to_tab(t_fdf *fdf, t_lines *lines)
 {
 	int	index;
 	int	x;
 	int	y;
 
 	fdf->nb_vertices = fdf->nb_cols * fdf->nb_rows;
-	if (!(fdf->vtcs_3d = (t_vertex*)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
+	if (!(fdf->vtcs_3d =\
+		(t_vertex*)malloc(sizeof(t_vertex) * fdf->nb_vertices)))
 		return (print_sys_error(errno));
 	index = 0;
 	y = -1;
@@ -111,6 +112,6 @@ int			parse_map(t_fdf *fdf, int fd)
 		return (ret == -1 ? print_sys_error(errno) : 1);
 	}
 	ret = copy_list_to_tab(fdf, lines);
-	free_list(lines);	
+	free_list(lines);
 	return (ret);
 }

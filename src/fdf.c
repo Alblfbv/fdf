@@ -6,31 +6,11 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 18:22:04 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 14:26:37 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 16:49:55 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*
-static void	display_tabs(t_fdf *fdf)
-{
-	int		i = -1;
-	ft_printf("----- tab 3d --------\n");
-	while (++i < fdf->nb_vertices)
-	{
-		ft_printf("---%d---\n", i);
-		ft_printf("x = %lf | y = %lf | z = %lf\n", fdf->vtcs_3d[i].x, fdf->vtcs_3d[i].y, fdf->vtcs_3d[i].z);
-	}
-	i = -1;
-	ft_printf("-----tab edges-----\n");
-	while (++i < fdf->nb_edges)
-	{
-		ft_printf("--- %d ---\n", i);
-		ft_printf("vtc1 = %d | vtc2 = %d\n", fdf->edges[i].vtx_1, fdf->edges[i].vtx_2);
-	}
-}
-*/
 
 static void	draw_img_border(t_fdf *fdf, int wire_color)
 {
@@ -57,52 +37,48 @@ static void	draw_img_border(t_fdf *fdf, int wire_color)
 	bot_right.endian = fdf->mlx.img.endian;
 	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img_top, top_left, top_right);
 	l_mlx_draw_line_bresenham(&fdf->mlx.bg_img_bot, bot_left, bot_right);
-	//l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, top_left, bot_left);
-	//l_mlx_draw_line_bresenham(&fdf->mlx.bg_img, top_right, bot_right);
 }
 
-void	draw_background(t_fdf *fdf)
+static void	color_bg_img_zone(t_point *point, t_img *img, int y_lim, int x_lim)
 {
 	int	x;
 	int	y;
-	int	background_color;
-	int	wire_color;
+
+	y = -1;
+	while (++y < y_lim)
+	{
+		x = -1;
+		point->y = y;
+		while (++x < x_lim)
+		{
+			point->x = x;
+			l_mlx_write_pixel(img, point);
+		}
+	}
+}
+
+void		draw_background(t_fdf *fdf)
+{
+	int		background_color;
+	int		wire_color;
 	t_point	point;
 
 	if (fdf->mods.color_mode == unicolor)
-		wire_color = l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
+		wire_color =\
+			l_mlx_sub_to_color(fdf->wireframe_col, fdf->mlx.img.endian);
 	else
 		wire_color = fdf->color_tabs[fdf->mods.color_set][2].color;
 	background_color = fdf->mlx.img.endian == LITTLE ?\
 		l_mlx_compute_color_little(0, wire_color, 0.15) :\
 		l_mlx_compute_color_big(0, wire_color, 0.15);
-	y = -1;
 	point.color = background_color;
-	while (++y < START_Y_IMG)
-	{
-		x = -1;
-		point.y = y;
-		while (++x < WIN_WDTH)
-		{
-			point.x = x;
-			l_mlx_write_pixel(&fdf->mlx.bg_img_top, &point);
-		}
-	}
-	y = -1;
-	while (++y < WIN_HGHT - START_Y_IMG - IMG_HGHT)
-	{
-		x = -1;
-		point.y = y;
-		while (++x < WIN_WDTH)
-		{
-			point.x = x;
-			l_mlx_write_pixel(&fdf->mlx.bg_img_bot, &point);
-		}
-	}
+	color_bg_img_zone(&point, &fdf->mlx.bg_img_top, START_Y_IMG, WIN_WDTH);
+	color_bg_img_zone(&point, &fdf->mlx.bg_img_bot,\
+		WIN_HGHT - START_Y_IMG - IMG_HGHT, WIN_WDTH);
 	draw_img_border(fdf, wire_color);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_fdf	fdf;
 	int		ret;
@@ -116,8 +92,6 @@ int		main(int ac, char **av)
 	ret = parse_map(&fdf, fd);
 	if (!ret)
 		ret = init_fdf(&fdf);
-//	if (!ret)
-//		display_tabs(&fdf);
 	if (!ret)
 	{
 		display_object_routine(&fdf);

@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:10:00 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 15:38:16 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 16:26:12 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int		handle_key_events(int keycode, t_fdf *fdf)
 int		handle_quit_event_mouse(t_fdf *fdf)
 {
 	free_fdf(fdf);
-	exit (0);
+	exit(0);
 	return (0);
 }

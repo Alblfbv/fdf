@@ -12,12 +12,13 @@ Polycolor :
 -OK
 
 Menu :
--Ajouter options : Ajouter cycle set
+-Ajouter options : Ajouter cycle set -> OK
 -Inverser evenements move -> OK
 
 Projections :
--Verifier cavalier + position start + vue start
--Chercher rapidement une 3eme (si on a le temps)
+-Verifier cavalier + vue start -> OK
+-Chercher rapidement une 3eme (si on a le temps) -> OK
+-position start
 
 Reset :
 -Remettre couleur de depart -> OK

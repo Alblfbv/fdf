@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:14:01 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/25 19:53:17 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:20:51 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int			handle_alt_events(int keycode, t_fdf *fdf)
 int			handle_draw_mode_event(int keycode, t_fdf *fdf)
 {
 	(void)keycode;
-	fdf->mods.draw_mode = (fdf->mods.draw_mode == xiaolin ? bresenham : xiaolin);
+	fdf->mods.draw_mode =\
+		(fdf->mods.draw_mode == xiaolin ? bresenham : xiaolin);
 	display_object_routine(fdf);
 	return (0);
 }
@@ -55,10 +56,10 @@ int			handle_quit_event(int keycode, t_fdf *fdf)
 {
 	(void)keycode;
 	free_fdf(fdf);
-	exit (0);
+	exit(0);
 }
 
-int		handle_move_events(int keycode, t_fdf *fdf)
+int			handle_move_events(int keycode, t_fdf *fdf)
 {
 	static int	tab[4] = {MOVE_L, MOVE_R, MOVE_U, MOVE_D};
 	int			i;
