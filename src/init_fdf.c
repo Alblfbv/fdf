@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 11:37:17 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 19:23:52 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:56:08 by allefebv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ static void	compute_base_scale(t_fdf *fdf)
 	{
 		limit1 = -cos((double)(M_PI / 6)) * fdf->nb_rows;
 		limit2 = cos((double)(M_PI / 6)) * fdf->nb_cols;
-		scale_x = (IMG_WDTH - 2 * X_SHIFT) / (int)(limit2 - limit1);
+		scale_x = (IMG_WDTH - 2 * X_SHIFT) / (int)(limit2 - limit1) == 0 ?\
+			1 : (int)(limit2 - limit1);
 	}
 	if (fdf->nb_rows == 1)
 		scale_y = 0xFFFFFFFF;
@@ -86,7 +87,8 @@ static void	compute_base_scale(t_fdf *fdf)
 	{
 		limit1 = 0;
 		limit2 = sin((double)(M_PI / 6)) * (fdf->nb_cols + fdf->nb_rows);
-		scale_y = (IMG_HGHT - 2 * Y_SHIFT) / (int)(limit2 - limit1);
+		scale_y = (IMG_HGHT - 2 * Y_SHIFT) / (int)(limit2 - limit1) == 0 ?\
+			1 : (int)(limit2 - limit1);
 	}
 	fdf->base_scale = (scale_x > scale_y ? scale_y : scale_x);
 }
