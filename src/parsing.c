@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:51:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/26 20:08:09 by allefebv         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:28:28 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int			parse_map(t_fdf *fdf, int fd)
 		free_list(lines);
 		return (ret == -1 ? print_sys_error(errno) : 1);
 	}
+	if (!fdf->nb_rows)
+		return (print_input_error(1));
 	ret = copy_list_to_tab(fdf, lines);
 	free_list(lines);
 	return (ret);
