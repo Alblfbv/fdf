@@ -6,7 +6,7 @@
 /*   By: rkirszba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:37:02 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/24 15:20:38 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:01:09 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		print_input_error(int errnum)
 		ft_putstr_fd("Not an int value\n", 2);
 	if (errnum == 2)
 		ft_putstr_fd("Wrong number of columns\n", 2);
+	if (errnum == 3)
+		ft_putstr_fd("Empty file\n", 2);
 	return (1);
 }
 

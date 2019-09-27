@@ -6,7 +6,7 @@
 /*   By: allefebv <allefebv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 10:51:58 by rkirszba          #+#    #+#             */
-/*   Updated: 2019/09/27 15:28:28 by rkirszba         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:14:52 by rkirszba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,19 @@ int			parse_map(t_fdf *fdf, int fd)
 	str = NULL;
 	while ((ret = get_next_line2(fd, &line, &str)) > 0)
 	{
-		if (ret == -1 || (ret = check_line(fdf, &lines, line)))
+		if ((ret = check_line(fdf, &lines, line)))
 			break ;
 		ft_strdel(&line);
 		(fdf->nb_rows)++;
 	}
 	ft_strdel(&line);
 	ft_strdel(&str);
-	if (ret)
-	{
-		free_list(lines);
-		return (ret == -1 ? print_sys_error(errno) : 1);
-	}
-	if (!fdf->nb_rows)
-		return (print_input_error(1));
-	ret = copy_list_to_tab(fdf, lines);
+	if (!ret && !fdf->nb_rows)
+		print_input_error(3);
+	if (ret == -1)
+		print_sys_error(errno);
+	if (!ret && fdf->nb_rows)
+		ret = copy_list_to_tab(fdf, lines);
 	free_list(lines);
-	return (ret);
+	return (!ret && fdf->nb_rows ? 0 : 1);
 }
